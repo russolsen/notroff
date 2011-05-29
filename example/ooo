@@ -1,0 +1,2028 @@
+after para type assigner:
+Paragraph: Paragraph: filter base_doc 
+Desired indent: 0 [class BaseDocument   ##(base_doc]
+###delta indent for 0 [class BaseDocument   ##(base_doc]
+Delta indent is 0 for [class BaseDocument   ##(base_doc]
+adjust: 0 [class BaseDocument]
+  result = [class BaseDocument]
+adjust: 0 []
+  result = []
+adjust: 0 [  def author]
+  result = [  def author]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def author=]
+  result = [  def author=]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def title]
+  result = [  def title]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def title=]
+  result = [  def title=]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def words]
+  result = [  def words]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def content]
+  result = [  def content]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def content=]
+  result = [  def content=]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def words]
+  result = [  def words]
+adjust: 0 [    raise "Not Implemented"]
+  result = [    raise "Not Implemented"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 [end]
+  result = [end]
+["class BaseDocument",
+ "",
+ "  def author",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def author=",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def title",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def title=",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def words",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def content",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def content=",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "",
+ "  def words",
+ "    raise \"Not Implemented\"",
+ "  end",
+ "end"]
+Paragraph: Paragraph: filter document 
+Desired indent: 0 [class Document < BaseDocument   ##(document]
+###delta indent for 0 [class Document < BaseDocument   ##(document]
+Delta indent is 0 for [class Document < BaseDocument   ##(document]
+adjust: 0 [class Document < BaseDocument]
+  result = [class Document < BaseDocument]
+adjust: 0 [  attr_accessor :title, :author, :content]
+  result = [  attr_accessor :title, :author, :content]
+adjust: 0 []
+  result = []
+adjust: 0 [  def initialize( title, author, content )]
+  result = [  def initialize( title, author, content )]
+adjust: 0 [    @title = title]
+  result = [    @title = title]
+adjust: 0 [    @author = author]
+  result = [    @author = author]
+adjust: 0 [    @content = content]
+  result = [    @content = content]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def words]
+  result = [  def words]
+adjust: 0 [    @content.split]
+  result = [    @content.split]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [end]
+  result = [end]
+["class Document < BaseDocument",
+ "  attr_accessor :title, :author, :content",
+ "",
+ "  def initialize( title, author, content )",
+ "    @title = title",
+ "    @author = author",
+ "    @content = content",
+ "  end",
+ "",
+ "  def words",
+ "    @content.split",
+ "  end",
+ "",
+ "end"]
+Paragraph: Paragraph: filter lazy_doc 
+Desired indent: 0 [class LazyDocument < BaseDocument  ##(lazy_doc]
+###delta indent for 0 [class LazyDocument < BaseDocument  ##(lazy_doc]
+Delta indent is 0 for [class LazyDocument < BaseDocument  ##(lazy_doc]
+adjust: 0 [class LazyDocument < BaseDocument]
+  result = [class LazyDocument < BaseDocument]
+adjust: 0 []
+  result = []
+adjust: 0 [  attr_writer :title, :author, :content]
+  result = [  attr_writer :title, :author, :content]
+adjust: 0 []
+  result = []
+adjust: 0 [  def initialize( path )]
+  result = [  def initialize( path )]
+adjust: 0 [    @path = path]
+  result = [    @path = path]
+adjust: 0 [    @document_read = false]
+  result = [    @document_read = false]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def title]
+  result = [  def title]
+adjust: 0 [    read_document]
+  result = [    read_document]
+adjust: 0 [    @title]
+  result = [    @title]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def title=( new_title )]
+  result = [  def title=( new_title )]
+adjust: 0 [    read_document]
+  result = [    read_document]
+adjust: 0 [    @title = new_title]
+  result = [    @title = new_title]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def author]
+  result = [  def author]
+adjust: 0 [    read_document]
+  result = [    read_document]
+adjust: 0 [    @author]
+  result = [    @author]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def author=( new_author )]
+  result = [  def author=( new_author )]
+adjust: 0 [    read_document]
+  result = [    read_document]
+adjust: 0 [    @author = new_author]
+  result = [    @author = new_author]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def content]
+  result = [  def content]
+adjust: 0 [    read_document]
+  result = [    read_document]
+adjust: 0 [    @content]
+  result = [    @content]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def content=( new_content )]
+  result = [  def content=( new_content )]
+adjust: 0 [    read_document]
+  result = [    read_document]
+adjust: 0 [    @content = new_content]
+  result = [    @content = new_content]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def read_document]
+  result = [  def read_document]
+adjust: 0 [    return if @document_read]
+  result = [    return if @document_read]
+adjust: 0 [    File.open( @path ) do | f |]
+  result = [    File.open( @path ) do | f |]
+adjust: 0 [      @title = f.readline.chomp]
+  result = [      @title = f.readline.chomp]
+adjust: 0 [      @author = f.readline.chomp]
+  result = [      @author = f.readline.chomp]
+adjust: 0 [      @content = f.read]
+  result = [      @content = f.read]
+adjust: 0 [    end]
+  result = [    end]
+adjust: 0 [    @document_read = true]
+  result = [    @document_read = true]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def words]
+  result = [  def words]
+adjust: 0 [    content.split]
+  result = [    content.split]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 [end]
+  result = [end]
+["class LazyDocument < BaseDocument",
+ "",
+ "  attr_writer :title, :author, :content",
+ "",
+ "  def initialize( path )",
+ "    @path = path",
+ "    @document_read = false",
+ "  end",
+ "",
+ "  def title",
+ "    read_document",
+ "    @title",
+ "  end",
+ "",
+ "  def title=( new_title )",
+ "    read_document",
+ "    @title = new_title",
+ "  end",
+ "",
+ "  def author",
+ "    read_document",
+ "    @author",
+ "  end",
+ "",
+ "  def author=( new_author )",
+ "    read_document",
+ "    @author = new_author",
+ "  end",
+ "",
+ "  def content",
+ "    read_document",
+ "    @content",
+ "  end",
+ "",
+ "  def content=( new_content )",
+ "    read_document",
+ "    @content = new_content",
+ "  end",
+ "",
+ "  def read_document",
+ "    return if @document_read",
+ "    File.open( @path ) do | f |",
+ "      @title = f.readline.chomp",
+ "      @author = f.readline.chomp",
+ "      @content = f.read",
+ "    end",
+ "    @document_read = true",
+ "  end",
+ "",
+ "  def words",
+ "    content.split",
+ "  end",
+ "end"]
+Paragraph: Paragraph: filter 2cities 
+Desired indent: 0 [    two_cities = Title.new( 'A Tale Of Two Cities',   ##(2cities]
+###delta indent for -4 [    two_cities = Title.new( 'A Tale Of Two Cities',   ##(2cities]
+Delta indent is -4 for [    two_cities = Title.new( 'A Tale Of Two Cities',   ##(2cities]
+adjust: -4 [    two_cities = Title.new( 'A Tale Of Two Cities',]
+  result = [two_cities = Title.new( 'A Tale Of Two Cities',]
+adjust: -4 [                            '2 Cities', '0-999-99999-9' )]
+  result = [                        '2 Cities', '0-999-99999-9' )]
+adjust: -4 [    dickens = Author.new( 'Charles', 'Dickens' )]
+  result = [dickens = Author.new( 'Charles', 'Dickens' )]
+adjust: -4 [    doc = Document.new( two_cities, dickens, 'It was the best...' )]
+  result = [doc = Document.new( two_cities, dickens, 'It was the best...' )]
+["two_cities = Title.new( 'A Tale Of Two Cities',",
+ "                        '2 Cities', '0-999-99999-9' )",
+ "dickens = Author.new( 'Charles', 'Dickens' )",
+ "doc = Document.new( two_cities, dickens, 'It was the best...' )"]
+Paragraph: Paragraph: filter main 
+Desired indent: 0 [class Document     ##(main]
+###delta indent for 0 [class Document     ##(main]
+Delta indent is 0 for [class Document     ##(main]
+adjust: 0 [class Document]
+  result = [class Document]
+adjust: 0 [  # Most of the class omitted...]
+  result = [  # Most of the class omitted...]
+adjust: 0 []
+  result = []
+adjust: 0 [  def description]
+  result = [  def description]
+adjust: 0 [    "#{@title.long_name} by #{@author.last_name}"]
+  result = [    "#{@title.long_name} by #{@author.last_name}"]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 [end]
+  result = [end]
+["class Document",
+ "  # Most of the class omitted...",
+ "",
+ "  def description",
+ "    \"\#{@title.long_name} by \#{@author.last_name}\"",
+ "  end",
+ "end"]
+Paragraph: Paragraph: filter bad_type 2
+Desired indent: 2 [  def initialize( title, author, content )              ##(bad_type]
+###delta indent for 0 [  def initialize( title, author, content )              ##(bad_type]
+Delta indent is 0 for [  def initialize( title, author, content )              ##(bad_type]
+adjust: 0 [  def initialize( title, author, content )]
+  result = [  def initialize( title, author, content )]
+adjust: 0 [    raise "title isn't a String" unless title.kind_of? String]
+  result = [    raise "title isn't a String" unless title.kind_of? String]
+adjust: 0 [    raise "author isn't a String" unless author.kind_of? String]
+  result = [    raise "author isn't a String" unless author.kind_of? String]
+adjust: 0 [    raise "content isn't a String" unless content.kind_of? String]
+  result = [    raise "content isn't a String" unless content.kind_of? String]
+adjust: 0 [    @title = title]
+  result = [    @title = title]
+adjust: 0 [    @author = author]
+  result = [    @author = author]
+adjust: 0 [    @content = content]
+  result = [    @content = content]
+adjust: 0 [  end]
+  result = [  end]
+["  def initialize( title, author, content )",
+ "    raise \"title isn't a String\" unless title.kind_of? String",
+ "    raise \"author isn't a String\" unless author.kind_of? String",
+ "    raise \"content isn't a String\" unless content.kind_of? String",
+ "    @title = title",
+ "    @author = author",
+ "    @content = content",
+ "  end"]
+Paragraph: Paragraph: filter longer 2
+Desired indent: 2 [  def is_longer_than?( n ) ##(longer]
+###delta indent for 0 [  def is_longer_than?( n ) ##(longer]
+Delta indent is 0 for [  def is_longer_than?( n ) ##(longer]
+adjust: 0 [  def is_longer_than?( n )]
+  result = [  def is_longer_than?( n )]
+adjust: 0 [    @content.length > n]
+  result = [    @content.length > n]
+adjust: 0 [  end]
+  result = [  end]
+["  def is_longer_than?( n )", "    @content.length > n", "  end"]
+Paragraph: Paragraph: filter longer 2
+Desired indent: 2 [  def is_longer_than?( number_of_characters ) ##(longer]
+###delta indent for 0 [  def is_longer_than?( number_of_characters ) ##(longer]
+Delta indent is 0 for [  def is_longer_than?( number_of_characters ) ##(longer]
+adjust: 0 [  def is_longer_than?( number_of_characters )]
+  result = [  def is_longer_than?( number_of_characters )]
+adjust: 0 [    @content.length > number_of_characters]
+  result = [    @content.length > number_of_characters]
+adjust: 0 [  end]
+  result = [  end]
+["  def is_longer_than?( number_of_characters )",
+ "    @content.length > number_of_characters",
+ "  end"]
+Paragraph: Paragraph: filter longer 2
+Desired indent: 2 [  # Given a number, which needs to be an instance of Numeric, ##(longer]
+###delta indent for 0 [  # Given a number, which needs to be an instance of Numeric, ##(longer]
+Delta indent is 0 for [  # Given a number, which needs to be an instance of Numeric, ##(longer]
+adjust: 0 [  # Given a number, which needs to be an instance of Numeric,]
+  result = [  # Given a number, which needs to be an instance of Numeric,]
+adjust: 0 [  # return true if the number of characters in the document]
+  result = [  # return true if the number of characters in the document]
+adjust: 0 [  # exceeds the number.]
+  result = [  # exceeds the number.]
+adjust: 0 [  def is_longer_than?( number_of_characters )]
+  result = [  def is_longer_than?( number_of_characters )]
+adjust: 0 [    @content.length > number_of_characters]
+  result = [    @content.length > number_of_characters]
+adjust: 0 [  end]
+  result = [  end]
+["  # Given a number, which needs to be an instance of Numeric,",
+ "  # return true if the number of characters in the document",
+ "  # exceeds the number.",
+ "  def is_longer_than?( number_of_characters )",
+ "    @content.length > number_of_characters",
+ "  end"]
+Paragraph: Paragraph: filter cryptic 
+Desired indent: 0 [class Doc                      ##(cryptic]
+###delta indent for 0 [class Doc                      ##(cryptic]
+Delta indent is 0 for [class Doc                      ##(cryptic]
+adjust: 0 [class Doc]
+  result = [class Doc]
+adjust: 0 [  attr_accessor :ttl, :au, :c]
+  result = [  attr_accessor :ttl, :au, :c]
+adjust: 0 []
+  result = []
+adjust: 0 [  def initialize(ttl, au, c)]
+  result = [  def initialize(ttl, au, c)]
+adjust: 0 [    @ttl = ttl; @au = au; @c = c]
+  result = [    @ttl = ttl; @au = au; @c = c]
+adjust: 0 [  end]
+  result = [  end]
+adjust: 0 []
+  result = []
+adjust: 0 [  def wds;  @c.split; end]
+  result = [  def wds;  @c.split; end]
+adjust: 0 [end]
+  result = [end]
+["class Doc",
+ "  attr_accessor :ttl, :au, :c",
+ "",
+ "  def initialize(ttl, au, c)",
+ "    @ttl = ttl; @au = au; @c = c",
+ "  end",
+ "",
+ "  def wds;  @c.split; end",
+ "end"]
+Paragraph: Paragraph: filter open 
+Desired indent: 0 [    open_file = File.open( '/etc/passwd' )   ##+open]
+###delta indent for -4 [    open_file = File.open( '/etc/passwd' )   ##+open]
+adjust: -4 [    open_file = File.open( '/etc/passwd' )]
+  result = [open_file = File.open( '/etc/passwd' )]
+Paragraph: Paragraph: filter sio 
+Desired indent: 0 [    require 'stringio'                                                ##(sio]
+###delta indent for -4 [    require 'stringio'                                                ##(sio]
+Delta indent is -4 for [    require 'stringio'                                                ##(sio]
+adjust: -4 [    require 'stringio']
+  result = [require 'stringio']
+adjust: -4 [    open_string = StringIO.new( "So say we all!\nSo say we all!\n" )]
+  result = [open_string = StringIO.new( "So say we all!\nSo say we all!\n" )]
+["require 'stringio'",
+ "open_string = StringIO.new( \"So say we all!\\nSo say we all!\\n\" )"]
+Paragraph: Paragraph: filter set 
+Desired indent: 0 [    five_even = [ 2, 4, 6, 8, 10 ]             ##(set]
+###delta indent for -4 [    five_even = [ 2, 4, 6, 8, 10 ]             ##(set]
+Delta indent is -4 for [    five_even = [ 2, 4, 6, 8, 10 ]             ##(set]
+adjust: -4 [    five_even = [ 2, 4, 6, 8, 10 ]]
+  result = [five_even = [ 2, 4, 6, 8, 10 ]]
+adjust: -4 [    five_even_set = Set.new( five_even )]
+  result = [five_even_set = Set.new( five_even )]
+["five_even = [ 2, 4, 6, 8, 10 ]", "five_even_set = Set.new( five_even )"]
+remove escapes, [Document] => remove escapes, [@author] => remove escapes, [@title] => remove escapes, [@content] => remove escapes, [Document] => ### adding code for [[class BaseDocument]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: BaseDocument
+### adding code for [[]]
+### adding code for [[  def author]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def author=]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author=
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def title]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def title=]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title=
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def words]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: words
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def content]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def content=]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content=
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def words]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: words
+### adding code for [[    raise "Not Implemented"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Implemented"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[end]]
+### chunk: end
+remove escapes, [Document] => remove escapes, [BaseDocument] => ### adding code for [[class Document < BaseDocument]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Document
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: <
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: BaseDocument
+### adding code for [[  attr_accessor :title, :author, :content]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: attr_accessor
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :title,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :author,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :content
+### adding code for [[]]
+### adding code for [[  def initialize( title, author, content )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    @title = title]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @title
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title
+### adding code for [[    @author = author]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @author
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author
+### adding code for [[    @content = content]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def words]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: words
+### adding code for [[    @content.split]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content.split
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[end]]
+### chunk: end
+remove escapes, [LazyDocument] => remove escapes, [BaseDocument] => ### adding code for [[class LazyDocument < BaseDocument]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: LazyDocument
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: <
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: BaseDocument
+### adding code for [[]]
+### adding code for [[  attr_writer :title, :author, :content]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: attr_writer
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :title,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :author,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :content
+### adding code for [[]]
+### adding code for [[  def initialize( path )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: path
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    @path = path]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @path
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: path
+### adding code for [[    @document_read = false]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @document_read
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: false
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def title]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title
+### adding code for [[    read_document]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: read_document
+### adding code for [[    @title]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @title
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def title=( new_title )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title=(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: new_title
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    read_document]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: read_document
+### adding code for [[    @title = new_title]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @title
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: new_title
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def author]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author
+### adding code for [[    read_document]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: read_document
+### adding code for [[    @author]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @author
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def author=( new_author )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author=(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: new_author
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    read_document]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: read_document
+### adding code for [[    @author = new_author]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @author
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: new_author
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def content]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### adding code for [[    read_document]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: read_document
+### adding code for [[    @content]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def content=( new_content )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content=(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: new_content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    read_document]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: read_document
+### adding code for [[    @content = new_content]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: new_content
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def read_document]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: read_document
+### adding code for [[    return if @document_read]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: return
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: if
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: @document_read
+### adding code for [[    File.open( @path ) do | f |]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: File.open(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: @path
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: do
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: |
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: f
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: |
+### adding code for [[      @title = f.readline.chomp]]
+### chunk:       
+####adding space element for 6: <text:s text:c='6'/>
+### chunk: @title
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: f.readline.chomp
+### adding code for [[      @author = f.readline.chomp]]
+### chunk:       
+####adding space element for 6: <text:s text:c='6'/>
+### chunk: @author
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: f.readline.chomp
+### adding code for [[      @content = f.read]]
+### chunk:       
+####adding space element for 6: <text:s text:c='6'/>
+### chunk: @content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: f.read
+### adding code for [[    end]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: end
+### adding code for [[    @document_read = true]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @document_read
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: true
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def words]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: words
+### adding code for [[    content.split]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: content.split
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[end]]
+### chunk: end
+remove escapes, [LazyDocument] => remove escapes, [LazyDocument] => remove escapes, [Document] => remove escapes, [LazyDocument] => ### adding code for [[ doc = get_some_kind_of_document]]
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: doc
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: get_some_kind_of_document
+### adding code for [[  puts "Title: #{doc.title}"]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: puts
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Title:
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: #{doc.title}"
+### adding code for [[  puts "Author: #{doc.author}"]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: puts
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Author:
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: #{doc.author}"
+### adding code for [[  puts "Content: #{doc.content}"]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: puts
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "Content:
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: #{doc.content}"
+remove escapes, [BaseDocument] => remove escapes, [Document] => remove escapes, [LazyDocument] => remove escapes, [LazyDocument] => remove escapes, [Document] => remove escapes, [BaseDocument] => remove escapes, [BaseDocument] => remove escapes, [BaseDocument] => remove escapes, [BaseDocument] => ### adding code for [[class Document]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Document
+### adding code for [[  # Body of the class unchanged...]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Body
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: of
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: unchanged...
+### adding code for [[end]]
+### chunk: end
+### adding code for [[]]
+### adding code for [[class LazyDocument]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: LazyDocument
+### adding code for [[  # Body of the class unchanged...]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Body
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: of
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: unchanged...
+### adding code for [[end]]
+### chunk: end
+remove escapes, [Document] => remove escapes, [LazyDocument] => remove escapes, [BaseDocument] => remove escapes, [BaseDocument] => remove escapes, [Document] => ### adding code for [[class Title]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Title
+### adding code for [[  attr_reader :long_name, :short_name]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: attr_reader
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :long_name,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :short_name
+### adding code for [[  attr_reader :isbn]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: attr_reader
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :isbn
+### adding code for [[]]
+### adding code for [[  def initialize(long_name, short_name, isbn)]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(long_name,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: short_name,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: isbn)
+### adding code for [[    @long_name = long_name]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @long_name
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: long_name
+### adding code for [[    @short_name = short_name]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @short_name
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: short_name
+### adding code for [[    @isbn = isbn]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @isbn
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: isbn
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[end]]
+### chunk: end
+### adding code for [[]]
+### adding code for [[class Author]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Author
+### adding code for [[  attr_reader :first_name, :last_name]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: attr_reader
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :first_name,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :last_name
+### adding code for [[]]
+### adding code for [[  def initialize( first_name, last_name )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: first_name,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: last_name
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    @first_name = first_name]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @first_name
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: first_name
+### adding code for [[    @last_name = last_name]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @last_name
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: last_name
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[end]]
+### chunk: end
+remove escapes, [Document] => remove escapes, [Title] => remove escapes, [Author] => remove escapes, [Document] => ### adding code for [[two_cities = Title.new( 'A Tale Of Two Cities',]]
+### chunk: two_cities
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Title.new(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 'A
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Tale
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Of
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Two
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Cities',
+### adding code for [[                        '2 Cities', '0-999-99999-9' )]]
+### chunk:                         
+####adding space element for 24: <text:s text:c='24'/>
+### chunk: '2
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Cities',
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: '0-999-99999-9'
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[dickens = Author.new( 'Charles', 'Dickens' )]]
+### chunk: dickens
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Author.new(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 'Charles',
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 'Dickens'
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[doc = Document.new( two_cities, dickens, 'It was the best...' )]]
+### chunk: doc
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Document.new(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: two_cities,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: dickens,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 'It
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: was
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: best...'
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+remove escapes, [Document] => remove escapes, [Title] => remove escapes, [Author] => remove escapes, [Document] => remove escapes, [@title] => remove escapes, [@author] => remove escapes, [Document] => remove escapes, [Document] => remove escapes, [@title] => remove escapes, [@author] => ### adding code for [[class Document]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Document
+### adding code for [[  # Most of the class omitted...]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Most
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: of
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: omitted...
+### adding code for [[]]
+### adding code for [[  def description]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: description
+### adding code for [[    "#{@title.long_name} by #{@author.last_name}"]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: "#{@title.long_name}
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: by
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: #{@author.last_name}"
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[end]]
+### chunk: end
+remove escapes, [Document] => remove escapes, [@author] => remove escapes, [@title] => remove escapes, [description] => remove escapes, [Document] => remove escapes, [@title] => remove escapes, [long_name] => remove escapes, [@author] => remove escapes, [last_name] => remove escapes, [Document] => remove escapes, [long_name] => remove escapes, [@title] => ### adding code for [[  def initialize( title, author, content )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    raise "title isn't a String" unless title.kind_of? String]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "title
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: isn't
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: a
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String"
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: unless
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title.kind_of?
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String
+### adding code for [[    raise "author isn't a String" unless author.kind_of? String]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "author
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: isn't
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: a
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String"
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: unless
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author.kind_of?
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String
+### adding code for [[    raise "content isn't a String" unless content.kind_of? String]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: isn't
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: a
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String"
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: unless
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content.kind_of?
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String
+### adding code for [[    @title = title]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @title
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title
+### adding code for [[    @author = author]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @author
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author
+### adding code for [[    @content = content]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+remove escapes, [initialize] => remove escapes, [Document] => ### adding code for [[   def initialize( title, author, content )]]
+### chunk:    
+####adding space element for 3: <text:s text:c='3'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[  # Pseudo-Ruby! Don't try this at home!]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Pseudo-Ruby!
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Don't
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: try
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: this
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: at
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: home!
+### adding code for [[]]
+### adding code for [[  def initialize( String title, String author, String content )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: title,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: author,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: String
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: content
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+remove escapes, [Document] => remove escapes, [Document] => ### adding code for [[  def is_longer_than?( n )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: is_longer_than?(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: n
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    @content.length > n]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content.length
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: >
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: n
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+remove escapes, [is_longer_than?] => remove escapes, [required] => ### adding code for [[  def is_longer_than?( number_of_characters )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: is_longer_than?(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number_of_characters
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    @content.length > number_of_characters]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content.length
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: >
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number_of_characters
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[  # Given a number, which needs to be an instance of Numeric,]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Given
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: a
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: which
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: needs
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: to
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: be
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: an
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: instance
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: of
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Numeric,
+### adding code for [[  # return true if the number of characters in the document]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: return
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: true
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: if
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: of
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: characters
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: in
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: document
+### adding code for [[  # exceeds the number.]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: #
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: exceeds
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: the
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number.
+### adding code for [[  def is_longer_than?( number_of_characters )]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: is_longer_than?(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number_of_characters
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+### adding code for [[    @content.length > number_of_characters]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @content.length
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: >
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: number_of_characters
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+remove escapes, [Document] => remove escapes, [@author] => remove escapes, [last_name] => ### adding code for [[NoMethodError: undefined method `long_name' for "TwoCities":String]]
+### chunk: NoMethodError:
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: undefined
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: method
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: `long_name'
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: for
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "TwoCities":String
+remove escapes, [Author] => remove escapes, [String] => remove escapes, [Time] => remove escapes, [Employee] => ### adding code for [[class Doc]]
+### chunk: class
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Doc
+### adding code for [[  attr_accessor :ttl, :au, :c]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: attr_accessor
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :ttl,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :au,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: :c
+### adding code for [[]]
+### adding code for [[  def initialize(ttl, au, c)]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: initialize(ttl,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: au,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: c)
+### adding code for [[    @ttl = ttl; @au = au; @c = c]]
+### chunk:     
+####adding space element for 4: <text:s text:c='4'/>
+### chunk: @ttl
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: ttl;
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: @au
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: au;
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: @c
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: c
+### adding code for [[  end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: end
+### adding code for [[]]
+### adding code for [[  def wds;  @c.split; end]]
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: def
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: wds;
+### chunk:   
+####adding space element for 2: <text:s text:c='2'/>
+### chunk: @c.split;
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: end
+### adding code for [[end]]
+### chunk: end
+### adding code for [[open_file = File.open( '/etc/passwd' )]]
+### chunk: open_file
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: File.open(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: '/etc/passwd'
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+remove escapes, [StringIO] => ### adding code for [[require 'stringio']]
+### chunk: require
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 'stringio'
+### adding code for [[open_string = StringIO.new( "So say we all!\nSo say we all!\n" )]]
+### chunk: open_string
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: StringIO.new(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "So
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: say
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: we
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: all!\nSo
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: say
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: we
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: all!\n"
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+remove escapes, [open_file] => remove escapes, [open_string] => remove escapes, [readchar] => remove escapes, [readline] => remove escapes, [open_file.seek(0)] => remove escapes, [open_string.seek(0)] => remove escapes, [File] => remove escapes, [StringIO] => remove escapes, [Object] => remove escapes, [StringIO] => remove escapes, [File] => remove escapes, [Set] => remove escapes, [Set] => ### adding code for [[five_even = [ 2, 4, 6, 8, 10 ]]]
+### chunk: five_even
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: [
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 2,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 4,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 6,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 8,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: 10
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: ]
+### adding code for [[five_even_set = Set.new( five_even )]]
+### chunk: five_even_set
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: =
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: Set.new(
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: five_even
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: )
+remove escapes, [Set] => remove escapes, [enum] => remove escapes, [Set] => ### adding code for [[enum.is_a?(Enumerable) or raise ArgumentError, "not enumerable"]]
+### chunk: enum.is_a?(Enumerable)
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: or
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: raise
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: ArgumentError,
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: "not
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: enumerable"
+### adding code for [[enum.each { |o| add(o) }]]
+### chunk: enum.each
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: {
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: |o|
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: add(o)
+### chunk:  
+####adding space element for 1: <text:s text:c='1'/>
+### chunk: }
+remove escapes, [Enumerable] => remove escapes, [Enumerable] => remove escapes, [enum] => remove escapes, [Enumerable] => remove escapes, [enum.each] => remove escapes, [Enumerable] => remove escapes, [enum] => remove escapes, [Enumerable] => remove escapes, [Set] => remove escapes, [enum] => remove escapes, [each] => remove escapes, [Set] => remove escapes, [Enumerable] => remove escapes, [set.rb] => 

@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+require 'pp'
+require 'rubygems'
+
+this_dir = File.dirname(__FILE__)
+
+require "#{this_dir}/formatter"
+
+class Dumper < Formatter
+
+  def initialize( input, output, options={} )
+    super
+    @processors << Printer.new
+  end
+
+end
+   
+
+options={}
+
+f = Dumper.new( ARGV[0], ARGV[1], options  )
+f.process
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

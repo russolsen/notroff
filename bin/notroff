@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+require 'pp'
+require 'rubygems'
+
+require "notroff"
+
+class OdtFormatter < Formatter
+
+  def initialize( input, output, options={} )
+    super
+    @processors << OdtRenderer.new
+    @processors << TemplateExpander.new( File.read( ContentTemplate ) )
+    @processors << OdtReplacer.new( OdtSkeleton, @output )
+  end
+
+end
+   
+
+options={}
+
+if ARGV.first == '-fn'
+  options[:fn] = true
+  ARGV.shift
+end
+
+f = OdtFormatter.new( ARGV[0], ARGV[1], options  )
+f.process
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

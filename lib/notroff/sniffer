@@ -1,0 +1,85 @@
+#!/usr/bin/env ruby
+require 'pp'
+require 'rubygems'
+require 'set' 
+
+this_dir = File.dirname(__FILE__)
+
+require "#{this_dir}/formatter"
+
+class Sniffer  < Processor
+  COMMON_WORDS = %w{ class if attr_accessor attr_reader attr_writer
+  end new not or super each begin self return Array Hash Class String
+  Regexp Bignum Object nil == ===}
+
+  def initialize
+    super
+    @code = ''
+    @words = Set.new
+  end
+
+  def process( paragraphs )
+    puts "====== Shady looking stuff ======="
+    paragraphs.each {|p| process_paragraph(p)}
+    sniff_errors
+  end
+
+  def sniff_errors
+    words = remove_known_words(@words)
+    words.each do |word|
+      word = Regexp.escape( word )
+      re = Regexp.new( "\\W#{word}\\W" )
+      puts "[#{word}] not found" unless re =~ @code
+    end
+  end
+
+  def remove_known_words( words )
+    words -= COMMON_WORDS
+    if File.exist?( 'known_words.txt' )
+      known_words = File.readlines( 'known_words.txt' )
+      known_words.map! {|w| w.strip}
+      words -= known_words
+    end
+    words
+  end
+
+  def process_paragraph( p )
+    if p.type.to_s =~ /code/
+      process_code( p )
+    else
+      process_text( p )
+    end
+  end
+
+  def process_code( p )
+    puts "@@ found in #{p.text}" if p.text =~ /@@/
+    @code << "\n"
+    @code << p.text
+  end
+
+  def process_text( p )
+    tokens = p.text.split( /[ \t\n,\.:;(){}]/) 
+    tokens.each do |t| 
+      if t =~ /@@.*@@/
+        @words << t.sub( /@@(.*)@@/, '\1' )
+      end
+    end
+  end
+end
+
+
+class SnifferFormatter < Formatter
+
+  def initialize( input, output, options={} )
+    super
+    @processors << Sniffer.new
+  end
+
+end
+   
+
+options={}
+
+f = SnifferFormatter.new( ARGV[0], ARGV[1], options  )
+f.process
+
