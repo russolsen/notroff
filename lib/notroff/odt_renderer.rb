@@ -6,9 +6,12 @@ class OdtRenderer < Processor
 
   include REXML
 
+  LONG_DASH_CODE = 0xe1.chr + 0x80.chr + 0x93.chr
+
   PARAGRAPH_STYLES = { 
     :body => 'BodyNoIndent', :title => 'HB', :section => 'HC', :sec => 'HC',
     :first_code => 'CDT1', :middle_code => 'CDT', :end_code => 'CDTX',
+    :author => 'AU', :quote => 'Quotation',
     :single_code => 'C1', :pn => 'PN', :pt => 'PT', :cn => 'HA', :ct => 'HB' }
 
   @@footnote_number = 1
@@ -32,9 +35,9 @@ pp paragraphs
 
     result = new_text_element( type )
 
-    if [ :section, :sec, :title, :pn, :pt, :cn, :ct ].include?( type )
+    if [ :author, :section, :sec, :title, :pn, :pt, :cn, :ct ].include?( type )
       result.add_text( text )
-    elsif type == :body
+    elsif [:body, :quote].include?(type)
       add_body_text( text, result )
     elsif code_type?(type)
       add_code_text( text, result )
@@ -49,8 +52,10 @@ pp paragraphs
   end
 
   def new_text_element( type )
+puts "***New text element: #{type}"
     result = Element.new( "text:p" )
     result.attributes["text:style-name"] = PARAGRAPH_STYLES[type]
+puts "***New text element: #{PARAGRAPH_STYLES[type]}"
     result
   end
 

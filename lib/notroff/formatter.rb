@@ -26,6 +26,7 @@ class Formatter
     @processors << CommandProcessor.new
     @processors << ParagraphTypeAssigner.new
     @processors << ProgramOutputInserter.new
+    @processors << TextParagraphJoiner.new
     @processors << C1Inserter.new
     @processors << IncInserter.new
     @processors << CodeInserter.new( options )

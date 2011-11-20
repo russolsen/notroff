@@ -14,8 +14,17 @@ class Paragraph
     self.new( other.type, other.text, other.original )
   end
 
+  def blank?
+    return true if @text.nil?
+    @text !~ /\S/
+  end
+
+  def append_text( more_text )
+    @text += ( ' ' + more_text)
+  end
+
   def to_s
-    "Paragraph: #{type} #{text}"
+    "Paragraph: [#{type}] #{text}"
   end
 end
 
@@ -79,13 +88,15 @@ end
 class ParagraphTypeAssigner
 
   def process( paragraphs )
+puts "type assigner"
+p paragraphs
     processed_paragraphs = []
 
     current_type = :body
 
     paragraphs.each do |paragraph|  
       type = paragraph.type  
-      if (type == :body) or (type == :code)
+      if (type == :body) or (type == :code) or (type == :quote)
         current_type = type
 
       elsif type == :text
@@ -93,12 +104,18 @@ class ParagraphTypeAssigner
         new_p.type = current_type
         processed_paragraphs << new_p
 
+      #elsif type == :quote         # Quick hack
+      #  new_p = Paragraph.copy( paragraph )
+      #  new_p.type = :body
+      #  processed_paragraphs << new_p
+
       else
         processed_paragraphs << paragraph
       end
 
       current_type = :body if [ :section, :title, :code1 ].include?(type)
     end
+p processed_paragraphs
     processed_paragraphs
   end
 end
@@ -142,6 +159,40 @@ class CodeTypeRefiner
 
     #puts "prev: #{previous_type} type: #{type} next: #{next_type} result: #{new_type}"
     new_type
+  end
+end
+
+class TextParagraphJoiner
+
+  def process( paragraphs )
+    processed_paragraphs = []
+
+puts "*** before joining ***"
+p paragraphs
+    new_p = nil
+
+    paragraphs.each do |paragraph|  
+
+      if (paragraph.type  != :body) and (paragraph.type  != :quote)
+        processed_paragraphs << new_p if new_p
+        new_p = nil
+        processed_paragraphs << paragraph
+        
+      elsif paragraph.blank?
+        processed_paragraphs << new_p if new_p
+        new_p = nil
+
+      elsif new_p
+        new_p.append_text( paragraph.text )
+
+      else
+        new_p = paragraph 
+      end
+    end
+    processed_paragraphs << new_p if new_p
+puts "*** after joining ***"
+p processed_paragraphs
+    processed_paragraphs
   end
 end
 

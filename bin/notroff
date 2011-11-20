@@ -23,6 +23,11 @@ if ARGV.first == '-fn'
   ARGV.shift
 end
 
+unless ARGV.size == 2
+  raise "Usage: notroff <nr file> <odt file>"
+end
+
+
 f = OdtFormatter.new( ARGV[0], ARGV[1], options  )
 f.process
 
