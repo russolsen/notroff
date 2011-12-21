@@ -24,13 +24,25 @@ class Paragraph
   end
 
   def to_s
-    "Paragraph: [#{type}] #{text}"
+    "Paragraph: [#{type}] [[#{text}]]"
   end
 end
 
 class TextPrinter
   def process( text )
     puts text
+  end
+end
+
+class FileWriter
+  def initialize(output_file)
+    @output_file = output_file
+  end
+
+  def process(content)
+    File.open(@output_file, 'w') do |f|
+      f.print(content.to_s)
+    end
   end
 end
 
@@ -162,22 +174,48 @@ class CodeTypeRefiner
   end
 end
 
-class TextParagraphJoiner
+class SimilarParagraphJoiner
+  def initialize(target_type)
+    @target_type = target_type
+  end
 
   def process( paragraphs )
     processed_paragraphs = []
+    new_p = nil
+puts "**** before processing #{paragraphs.size}"
+    paragraphs.each do |paragraph|
+      if paragraph.type  != @target_type
+        processed_paragraphs << new_p if new_p
+        new_p = nil
+        processed_paragraphs << paragraph
 
-puts "*** before joining ***"
-p paragraphs
+      elsif new_p
+        new_p.text += "\n"
+        new_p.text += paragraph.text
+
+      else
+        new_p = paragraph 
+      end
+    end
+    processed_paragraphs << new_p if new_p
+    puts "**** after processing #{paragraphs.size}"
+    processed_paragraphs.each {|p| puts p}
+    processed_paragraphs
+  end
+end
+
+class TextParagraphJoiner
+  def process( paragraphs )
+    processed_paragraphs = []
+
     new_p = nil
 
-    paragraphs.each do |paragraph|  
-
+    paragraphs.each do |paragraph|
       if (paragraph.type  != :body) and (paragraph.type  != :quote)
         processed_paragraphs << new_p if new_p
         new_p = nil
         processed_paragraphs << paragraph
-        
+
       elsif paragraph.blank?
         processed_paragraphs << new_p if new_p
         new_p = nil
@@ -190,8 +228,6 @@ p paragraphs
       end
     end
     processed_paragraphs << new_p if new_p
-puts "*** after joining ***"
-p processed_paragraphs
     processed_paragraphs
   end
 end

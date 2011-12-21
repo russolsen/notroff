@@ -15,7 +15,6 @@ require "#{FormatOdtDir}/template_expander"
 
 
 class Editor
-
   def initialize( input, output )
     @input = input
     @output = output

@@ -1,20 +1,18 @@
 require 'rexml/document'
 require 'pp'
-require 'processor'
-require 'tokenize'
 
-
-class HTMLRenderer < Processor
+class HtmlRenderer < Processor
   include Tokenize
   include REXML
 
   def process( paragraphs )
-    elements = []
+    body = Element.new('body')
     paragraphs.each do |paragraph|
       new_element = format( paragraph )
-      elements << new_element if new_element
+      body.add new_element if new_element
     end
-    elements
+    puts body.to_s
+    body
   end
 
   def format( p )
@@ -39,6 +37,8 @@ class HTMLRenderer < Processor
 
   def tag_for(type)
     case type
+    when :body
+      'p'
     when :text
       'p'
     when :author
@@ -87,12 +87,12 @@ class HTMLRenderer < Processor
   end
 end
 
-p = [
-  Paragraph.new( :sec, "The section"),
-  Paragraph.new( :text, "hello @@some code@@ there\nhow ar you"),
-  Paragraph.new( :text, "hello @@some code@@ there\nhow ar you"),
-  Paragraph.new( :code, "if whatever\n  doit\nend"),
-  Paragraph.new( :text, "more text")
-]
-
-puts HTMLRenderer.new.process( p )
+#p = [
+#  Paragraph.new( :sec, "The section"),
+#  Paragraph.new( :text, "hello @@some code@@ there\nhow ar you"),
+#  Paragraph.new( :text, "hello @@some code@@ there\nhow ar you"),
+#  Paragraph.new( :code, "if whatever\n  doit\nend"),
+#  Paragraph.new( :text, "more text")
+#]
+#
+#puts HTMLRenderer.new.process( p )

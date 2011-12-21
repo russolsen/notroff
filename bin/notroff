@@ -4,31 +4,48 @@ require 'rubygems'
 
 require "notroff"
 
-class OdtFormatter < Formatter
 
-  def initialize( input, output, options={} )
+class OdtFormatter < Formatter
+  def initialize(input, output, options={})
     super
+    @processors << CodeTypeRefiner.new
     @processors << OdtRenderer.new
     @processors << TemplateExpander.new( File.read( ContentTemplate ) )
     @processors << OdtReplacer.new( OdtSkeleton, @output )
   end
-
 end
-   
+
+class HtmlFormatter < Formatter
+  def initialize(input, output, options={})
+    super
+    @processors << SimilarParagraphJoiner.new(:code)
+    @processors << HtmlRenderer.new
+    @processors << FileWriter.new(@output)
+  end
+end
+
 
 options={}
+formatter_class = OdtFormatter
 
-if ARGV.first == '-fn'
-  options[:fn] = true
-  ARGV.shift
+while true
+  if ARGV.first == '-fn'
+    options[:fn] = true
+    ARGV.shift
+  elsif ARGV.first == '-html'
+    formatter_class = HtmlFormatter
+    ARGV.shift
+  else
+    break
+  end
 end
 
 unless ARGV.size == 2
-  raise "Usage: notroff <nr file> <odt file>"
+  raise "Usage: notroff <nr file> <output file>"
 end
 
 
-f = OdtFormatter.new( ARGV[0], ARGV[1], options  )
+f = formatter_class.new( ARGV[0], ARGV[1], options  )
 f.process
 
 

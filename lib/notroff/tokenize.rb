@@ -1,7 +1,5 @@
 require 'rexml/document'
 require 'pp'
-require 'processor'
-
 
 module Tokenize
   def tokenize_body_text( text )

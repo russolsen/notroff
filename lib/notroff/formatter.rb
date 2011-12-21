@@ -32,7 +32,6 @@ class Formatter
     @processors << CodeInserter.new( options )
     @processors << LastOutputInserter.new
     @processors << CodeTagFilter.new
-    @processors << CodeTypeRefiner.new
   end
 
   def process
