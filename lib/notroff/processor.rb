@@ -1,33 +1,6 @@
 class Processor
 end
 
-class Paragraph
-  attr_accessor :type, :text, :original
-
-  def initialize( type, text='', original='' )
-    @type = type
-    @text = text
-    @original = original
-  end
-
-  def self.copy( other )
-    self.new( other.type, other.text, other.original )
-  end
-
-  def blank?
-    return true if @text.nil?
-    @text !~ /\S/
-  end
-
-  def append_text( more_text )
-    @text += ( ' ' + more_text)
-  end
-
-  def to_s
-    "Paragraph: [#{type}] [[#{text}]]"
-  end
-end
-
 class TextPrinter
   def process( text )
     puts text

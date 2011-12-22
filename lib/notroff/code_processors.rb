@@ -154,8 +154,9 @@ class ProgramOutputInserter
       ruby_file, tag = p.text.split
       status = system( "ruby #{ruby_file} >#{ruby_file}.out" )
       raise "Command #{ruby_file} failed" unless status
-      new_paragraphs << Paragraph.new( :filter, tag, p.original ) if tag
+      new_paragraphs << Paragraph.with_tags(:filter, :filter_tag=>tag) if tag
       new_paragraphs << Paragraph.new( :include, "#{ruby_file}.out" )
+      new_paragraphs << Paragraph.with_tags(:end_filter, :filter_tag=>tag) if tag
     end
     new_paragraphs
   end
@@ -173,8 +174,12 @@ class IncInserter
       end
       file, tag, indent = p.text.split
       raise "No file specificed" if file.empty?
-      new_paragraphs << Paragraph.new( :filter, tag + " #{indent}"  ) if tag
+      # TODO deal with indents
+      filter_paragraph = Paragraph.with_tags(:filter, :filter_tag=>tag) if tag
+      filter_paragraph.tag(:indent, indent.to_i) unless indent == ''
+      new_paragraphs << Paragraph.with_tags(:filter, :filter_tag=>tag) if tag
       new_paragraphs << Paragraph.new( :include, file  )
+      new_paragraphs << Paragraph.with_tags(:end_filter, :filter_tag=>tag) if tag
     end
 #puts "========= Inc Inserter ========"
 #pp new_paragraphs
@@ -184,7 +189,6 @@ class IncInserter
 end
 
 class C1Inserter 
-
   def process( paragraphs )
     new_paragraphs = []
 
@@ -274,7 +278,6 @@ class LastOutputInserter
   def join_text( paragraphs )
      ( paragraphs.map {|p| p.text} ).join("\n")
   end
-
 end
 
 

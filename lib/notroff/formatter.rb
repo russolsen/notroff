@@ -31,7 +31,9 @@ class Formatter
     @processors << IncInserter.new
     @processors << CodeInserter.new( options )
     @processors << LastOutputInserter.new
-    @processors << CodeTagFilter.new
+    @processors << TagDirectiveExtractor.new
+    @processors << Tagger.new
+    @processors << NewTagFilter.new
   end
 
   def process
