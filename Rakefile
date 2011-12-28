@@ -6,12 +6,12 @@ task :default =>  [ :spec, :gem ]
 
 desc "Run all examples"
 task :spec do |t|
-  cd 'spec' do
-    Dir['*_spec.rb'].sort.each do |f|
-      puts "Spec'ing #{f}"
-      sh "rspec #{f}"
-    end
-  end
+  sh "rspec -Ispec -Ilib -rnotroff spec"
+end
+
+desc "Run notroff"
+task :run do |t|
+  sh "ruby -Ilib -rnotroff bin/notroff test.nr out.html"
 end
 
 
