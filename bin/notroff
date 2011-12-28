@@ -1,32 +1,10 @@
 #!/usr/bin/env ruby
 require 'pp'
-require 'rubygems'
-
 require "notroff"
 
 
-class OdtFormatter < Formatter
-  def initialize(input, output, options={})
-    super
-    @processors << CodeTypeRefiner.new
-    @processors << OdtRenderer.new
-    @processors << TemplateExpander.new( File.read( ContentTemplate ) )
-    @processors << OdtReplacer.new( OdtSkeleton, @output )
-  end
-end
-
-class HtmlFormatter < Formatter
-  def initialize(input, output, options={})
-    super
-    @processors << SimilarParagraphJoiner.new(:code)
-    @processors << HtmlRenderer.new
-    @processors << FileWriter.new(@output)
-  end
-end
-
-
 options={}
-formatter_class = OdtFormatter
+formatter_class = HtmlFormatter
 
 while true
   if ARGV.first == '-fn'
@@ -45,7 +23,7 @@ unless ARGV.size == 2
 end
 
 
-f = formatter_class.new( ARGV[0], ARGV[1], options  )
+f = formatter_class.new( ARGV[0], ARGV[1]  )
 f.process
 
 

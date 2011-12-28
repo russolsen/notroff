@@ -1,8 +1,3 @@
-$: << '../lib'
-require 'notroff'
-require 'pp'
-
-
 describe TagDirectiveExtractor  do
 
   let(:paragraph) { Paragraph.new(:body) }
@@ -117,6 +112,17 @@ describe Tagger do
     paragraphs[1].tags.should be_empty
     paragraphs[2].tags.should include('foo')
     paragraphs[3].tags.should include('foo')
+  end
+
+  it 'should let you add single lines' do
+    paragraphs = [ new_paragraph('1st line'),
+                   new_paragraph('2nd line ## +extra'),
+                   new_paragraph('3rd line')]
+
+    paragraphs = tag_paragraphs(paragraphs)
+    paragraphs[0].tags.should be_empty
+    paragraphs[1].tags.should include('extra')
+    paragraphs[2].tags.should be_empty
   end
 
   it 'should respect the clear tags directive' do

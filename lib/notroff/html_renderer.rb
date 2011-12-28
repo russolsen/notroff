@@ -11,17 +11,15 @@ class HtmlRenderer < Processor
       new_element = format( paragraph )
       body.add new_element if new_element
     end
-    puts body.to_s
     body
   end
 
   def format( p )
-    type = p.type
-    text = p.text
+    type = p[:type]
+    text = p.string
 
     return nil if text.empty? and :type != :code
 
-    #puts "type: #{type}"
     if type == :code
       code_element(type, text)
     else
@@ -43,6 +41,8 @@ class HtmlRenderer < Processor
       'p'
     when :author
       'h3'
+    when :section
+      'h3'
     when :sec
       'h3'
     when :title
@@ -60,13 +60,13 @@ class HtmlRenderer < Processor
   def add_span( token, element )
     case token[:type]
     when :italic
-      element.add( span_for( token[:text], "em" ))
+      element.add( span_for( token.string, "em" ))
     when :code
-      element.add( span_for( token[:text], "code" ))
+      element.add( span_for( token.string, "code" ))
     when :bold
-      element.add( span_for( token[:text], "b" ))
+      element.add( span_for( token.string, "b" ))
     when :normal
-      element.add_text( token[:text] )
+      element.add_text( token.string )
     else
       raise "Dont know what to do with #{token}"
     end
@@ -86,13 +86,3 @@ class HtmlRenderer < Processor
     span
   end
 end
-
-#p = [
-#  Paragraph.new( :sec, "The section"),
-#  Paragraph.new( :text, "hello @@some code@@ there\nhow ar you"),
-#  Paragraph.new( :text, "hello @@some code@@ there\nhow ar you"),
-#  Paragraph.new( :code, "if whatever\n  doit\nend"),
-#  Paragraph.new( :text, "more text")
-#]
-#
-#puts HTMLRenderer.new.process( p )

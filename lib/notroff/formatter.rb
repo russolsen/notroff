@@ -1,49 +1,22 @@
-#!/usr/bin/env ruby
-require 'pp'
-require 'rubygems'
-
-FormatOdtDir = File.dirname(__FILE__)
-
-require "#{FormatOdtDir}/utils"
-require "#{FormatOdtDir}/processor"
-require "#{FormatOdtDir}/code_processors"
-require "#{FormatOdtDir}/odt_renderer"
-require "#{FormatOdtDir}/odt_replacer"
-require "#{FormatOdtDir}/template_expander"
-
-
-class Formatter
-
-  OdtSkeleton =  File.join( FormatOdtDir, 'skel.odt' )
-  ContentTemplate =  File.join( FormatOdtDir, 'content.xml.erb' )
-
-
-  def initialize( input, output, options={} )
-    @input = input
-    @output = output
-    @processors = []
-    @processors << TextReader.new( @input )
-    @processors << CommandProcessor.new
-    @processors << ParagraphTypeAssigner.new
-    @processors << ProgramOutputInserter.new
-    @processors << TextParagraphJoiner.new
-    @processors << C1Inserter.new
-    @processors << IncInserter.new
-    @processors << CodeInserter.new( options )
-    @processors << LastOutputInserter.new
-    @processors << TagDirectiveExtractor.new
-    @processors << Tagger.new
-    @processors << NewTagFilter.new
-  end
-
-  def process
-    result = nil
-    @processors.each do |processor|
-      result = processor.process( result )
-    end
+class Formatter < CompositeProcessor
+  def initialize()
+    super
+    add_processor CommandProcessor.new
+    add_processor TypeAssigner.new
+    add_processor EmbeddedRubyProcessor.new
+    add_processor BodyParagraphJoiner.new
   end
 end
-   
+
+class HtmlFormatter < Formatter
+  def initialize(input, output)
+    super()
+    prepend_processor FileReader.new(input)
+    add_processor CodeParagraphJoiner.new
+    add_processor HtmlRenderer.new
+    add_processor FileWriter.new(output)
+  end
+end
 
 
 

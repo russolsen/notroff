@@ -1,8 +1,3 @@
-$: << '../lib'
-require 'notroff'
-require 'pp'
-
-
 describe Paragraph do
   it 'should keep its fields straight' do
     d1 = Directive.new(:start, 'foo')

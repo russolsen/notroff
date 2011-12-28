@@ -1,5 +1,4 @@
 require 'rexml/document'
-require 'pp'
 
 module Tokenize
   def tokenize_body_text( text )
@@ -9,14 +8,14 @@ module Tokenize
     until text.empty?
       match = re.match( text )
       if match.nil?
-        results << { :type => :normal, :text => text }
+        results << Text.new(text, :type=>:normal)
         text = ''
       else
         unless match.pre_match.empty?
-          results << { :type => :normal, :text => match.pre_match }
+          results << Text.new(match.pre_match, :type=>:normal)
         end
         token =  match.to_s
-        results << { :type => token_type(token), :text => token_text(token) }
+        results << Text.new(token_text(token), :type=>token_type(token))
         text = match.post_match
       end
     end
@@ -43,7 +42,6 @@ module Tokenize
   end
 
   def remove_escapes( text )
-#print "remove escapes, [#{text}] => "
     text = text.clone
 
     results = ''
@@ -61,8 +59,6 @@ module Tokenize
         text = match.post_match
       end
     end
-#puts " #{results}"
     results
   end
 end
-
