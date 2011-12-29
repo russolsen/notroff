@@ -4,6 +4,7 @@ class Formatter < CompositeProcessor
     add_processor CommandProcessor.new
     add_processor TypeAssigner.new
     add_processor EmbeddedRubyProcessor.new
+    add_processor CodeScrubber.new
     add_processor BodyParagraphJoiner.new
   end
 end

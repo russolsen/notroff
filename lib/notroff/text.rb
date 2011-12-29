@@ -54,3 +54,16 @@ class Text
     "#{@string.inspect} :: #{@attrs.inspect}"
   end
 end
+
+class String
+  def to_text
+    Text.new(self)
+  end
+
+  alias_method :old_double_equals, :'=='
+
+  def ==(other)
+    return self == other.string if other.kind_of?(Text)
+    old_double_equals(other)
+  end
+end
