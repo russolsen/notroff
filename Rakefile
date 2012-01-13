@@ -11,7 +11,7 @@ end
 
 desc "Run notroff"
 task :run do |t|
-  sh "ruby -Ilib -rnotroff bin/notroff test.nr out.html"
+  sh "ruby -Ilib -rnotroff bin/notroff -d test.nr test.xml"
 end
 
 

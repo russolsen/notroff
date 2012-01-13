@@ -19,6 +19,16 @@ class HtmlFormatter < Formatter
   end
 end
 
+class DocbookFormatter < Formatter
+  def initialize(input, output)
+    super()
+    prepend_processor FileReader.new(input)
+    add_processor CodeParagraphJoiner.new
+    add_processor DocbookRenderer.new
+    add_processor FileWriter.new(output)
+  end
+end
+
 
 
 

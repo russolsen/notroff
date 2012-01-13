@@ -7,11 +7,8 @@ options={}
 formatter_class = HtmlFormatter
 
 while true
-  if ARGV.first == '-fn'
-    options[:fn] = true
-    ARGV.shift
-  elsif ARGV.first == '-html'
-    formatter_class = HtmlFormatter
+  if ARGV.first == '-d'
+    formatter_class = DocbookFormatter
     ARGV.shift
   else
     break
@@ -19,7 +16,7 @@ while true
 end
 
 unless ARGV.size == 2
-  raise "Usage: notroff <nr file> <output file>"
+  raise "Usage: notroff [-d] <nr file> <output file>"
 end
 
 

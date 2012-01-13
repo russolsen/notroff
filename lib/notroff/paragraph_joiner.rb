@@ -42,7 +42,7 @@ class BodyParagraphJoiner < ParagraphJoiner
   end
 
   def skip?(paragraph)
-    paragraph.empty?
+    paragraph[:type] == :body && paragraph.empty?
   end
 end
 

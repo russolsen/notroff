@@ -16,11 +16,20 @@ class CompositeProcessor
       puts "Applying processor #{processor.class} to #{paras.size} paragraphs"
       paras = processor.process( paras )
       puts "After processor #{processor.class}"
-      puts "Now have #{paras.size} paragraphs" if paras
-      p paras
-      puts "========="
+      dump(paras)
     end
     paras
+  end
+
+  def dump(array)
+    if array.nil?
+      puts "Array: #{array}"
+    else
+      puts "======="
+      puts "Array with #{array.size} items:"
+      array.each_with_index {|item, i| puts "[#{i}] - #{item}" }
+      puts "======="
+    end
   end
 end
 

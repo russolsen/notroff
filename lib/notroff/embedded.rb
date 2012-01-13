@@ -1,5 +1,5 @@
 class BetweenFilter
-  def initialize(re1, re2)
+  def initialize(re1, re2=re1)
     @re1 = re1
     @re2 = re2
   end
@@ -10,6 +10,7 @@ class BetweenFilter
       if state == :before_first and @re1 =~ para
         para[:included] = true
         state = :after_first
+        break if para =~ @re2
       elsif state == :after_first
         para[:included] = true
         break if para =~ @re2
@@ -57,6 +58,12 @@ class ClassFilter < DefinitionFilter
   end
 end
 
+class ModuleFilter < DefinitionFilter
+  def initialize(module_name, include_body)
+    super /^ *module +#{module_name}(\(|$| )/, include_body
+  end
+end
+
 class EmbeddedRubyProcessor
   def process(paragraphs)
     new_paragraphs = []
@@ -80,6 +87,7 @@ class EmbeddedRubyProcessor
   def embed(*filters, &block)
     paras = block.call.map {|line| line.rstrip}
     paras.map! {|p| Text.new(p, :type => :code)}
+    puts "EMBED: #{paras}"
     unless filters.empty?
       filters.each {|f| paras = f.process(paras)}
       paras = paras.find_all {|p| p[:included]}
@@ -95,7 +103,7 @@ class EmbeddedRubyProcessor
     embed(*filters) {File.popen(command).readlines}
   end
 
-  def between(re1, re2)
+  def matches(re1, re2=re1)
     BetweenFilter.new(re1, re2)
   end
 
@@ -105,6 +113,10 @@ class EmbeddedRubyProcessor
 
   def clazz(name, include_body=true)
     ClassFilter.new(name, include_body)
+  end
+
+  def mod(name, include_body=true)
+    ModuleFilter.new(name, include_body)
   end
 
   def indent(delta_indent, paragraphs)
