@@ -24,7 +24,7 @@ end
 
 gem_spec = Gem::Specification.new do |s|
   s.name = "notroff"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
   s.authors = ["Russ Olsen"]
   s.date = %q{2012-01-15}
   s.description = 'NotRoff A simple text to openoffice filter'
