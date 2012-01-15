@@ -2,13 +2,18 @@
 require 'pp'
 require "notroff"
 
-
 options={}
 formatter_class = HtmlFormatter
 
 while true
-  if ARGV.first == '-d'
+  if ARGV.first == '-o'
+    formatter_class = OdtFormatter
+    ARGV.shift
+  elsif ARGV.first == '-d'
     formatter_class = DocbookFormatter
+    ARGV.shift
+  elsif ARGV.first == '-v'
+    Logger.verbose = true
     ARGV.shift
   else
     break
