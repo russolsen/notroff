@@ -10,9 +10,7 @@ class Text
 
   def self.wrap_method(method_name)
     define_method method_name do |*args|
-      #print "method: #{method_name} "
       result = @string.send(method_name, *args)
-      #puts "Result: #{result}"
       return Text.new(result, attrs) if result.kind_of? String
       result
     end

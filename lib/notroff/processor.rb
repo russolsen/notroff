@@ -1,9 +1,3 @@
-module Log
-  def self.debug(*args)
-    puts (args.map {|x| x.to_s}).join(' ')
-  end
-end
-
 class Processor
 end
 

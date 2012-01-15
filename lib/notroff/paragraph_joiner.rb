@@ -3,12 +3,11 @@ class ParagraphJoiner
     processed_paragraphs = []
     new_p = nil
     paragraphs.each do |paragraph|
-      puts "top loop, new_p: [[#{new_p}]] para: [[#{paragraph}]]"
       do_join = join?(paragraph)
 
       if join?(paragraph)
         if new_p
-          new_p.string += "\n"
+          new_p.string += " "
           new_p.string += paragraph
         else
           new_p = paragraph

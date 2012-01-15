@@ -1,9 +1,11 @@
 require 'erb'
 
+TEMPLATE = File.expand_path('../content.xml.erb', __FILE__)
+
 class TemplateExpander < Processor
 
-  def initialize( template_text)
-    @template = ERB.new( template_text )
+  def initialize
+    @template = ERB.new(File.read(TEMPLATE))
   end
 
   def process( elements )

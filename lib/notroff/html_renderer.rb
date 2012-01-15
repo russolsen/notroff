@@ -45,8 +45,10 @@ class HtmlRenderer < Processor
       'h3'
     when :sec
       'h3'
-    when :title
+    when :chapter
       'h2'
+    when :title
+      'h1'
     else
         raise "Dont know what to do with #{type}"
     end
@@ -60,15 +62,17 @@ class HtmlRenderer < Processor
   def add_span( token, element )
     case token[:type]
     when :italic
-      element.add( span_for( token.string, "em" ))
+      element.add(span_for(token.string, "em"))
     when :code
-      element.add( span_for( token.string, "code" ))
+      element.add(span_for(token.string, "code"))
     when :bold
-      element.add( span_for( token.string, "b" ))
+      element.add(span_for(token.string, "b"))
     when :normal
-      element.add_text( token.string )
+      element.add_text(token.string)
+    when :footnote
+      add_body_text(" [#{token.string}] ", element)
     else
-      raise "Dont know what to do with #{token}"
+      raise "Dont know what to do with type #{token[:type]} - #{token}"
     end
   end
 

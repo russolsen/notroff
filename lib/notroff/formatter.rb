@@ -29,6 +29,17 @@ class DocbookFormatter < Formatter
   end
 end
 
+class OdtFormatter < Formatter
+  def initialize(input, output)
+    super()
+    prepend_processor FileReader.new(input)
+    add_processor CodeTypeRefiner.new
+    add_processor OdtRenderer.new
+    add_processor TemplateExpander.new
+    add_processor OdtReplacer.new(output)
+  end
+end
+
 
 
 

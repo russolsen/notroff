@@ -47,7 +47,7 @@ class DocbookRenderer < Processor
     when :author
       @author = text
     when :chapter
-      puts "adding chapter #{text}"
+      Logger.log "adding chapter #{text}"
       @chapter = Element.new('chapter')
       @chapters << @chapter
       @section = nil
@@ -55,14 +55,14 @@ class DocbookRenderer < Processor
       add_body_text(title_element, text)
       @chapter.add_element(title_element)
     when :section
-      puts "adding section #{text}"
+      Logger.log "adding section #{text}"
       @section = Element.new('section')
       @chapter.add(@section)
       title_element = Element.new('title')
       add_body_text(title_element, text)
       @section.add_element(title_element)
     when :body
-      puts "adding body #{text[0..5]}"
+      Logger.log "adding body #{text[0..5]}"
       paragraph = Element.new('para')
       add_body_text(paragraph, text)
       add_content_element(paragraph)
@@ -116,7 +116,7 @@ class DocbookRenderer < Processor
   end
 
   def add_span( token, element )
-    puts "Add span: token: #{token} element: #{element}"
+    Logger.log "Add span: token: #{token} element: #{element}"
     case token[:type]
     when :italic
       element.add( span_for( token.string, "emphasis" ))

@@ -1,5 +1,6 @@
-puts __FILE__
+Verbose = false unless defined?(Verbose)
 
+require "notroff/logger"
 require "notroff/string_extensions"
 require "notroff/text"
 require "notroff/io"
@@ -14,5 +15,9 @@ require "notroff/composite_processor"
 require "notroff/tokenize"
 require "notroff/html_renderer"
 require "notroff/docbook_renderer"
+require "notroff/odt_renderer"
+require "notroff/odt_replacer"
+require "notroff/template_expander"
+require "notroff/code_typer"
 require "notroff/formatter"
 require "notroff/filter"

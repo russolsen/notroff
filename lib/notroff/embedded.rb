@@ -30,7 +30,7 @@ class DefinitionFilter
     state = :before_def
     end_re = nil
     paras.each do |para|
-      puts para, (@def_re =~ para)
+      Logger.log para, (@def_re =~ para)
       if state == :before_def and @def_re =~ para
         para[:included] = true
         end_re = Regexp.new( "^#{' ' * para.string.indent_depth}end" )
@@ -69,7 +69,7 @@ class EmbeddedRubyProcessor
     new_paragraphs = []
     paragraphs.each do |p|
       if p[:type] == :x
-        puts p
+        Logger.log p
         results = process_command(p.string)
         new_paragraphs << results if results
       else
@@ -80,14 +80,14 @@ class EmbeddedRubyProcessor
   end
 
   def process_command(ruby_expression)
-    puts "Ruby expression: #{ruby_expression}"
+    Logger.log "Ruby expression: #{ruby_expression}"
     lines = eval(ruby_expression, binding)
   end
 
   def embed(*filters, &block)
     paras = block.call.map {|line| line.rstrip}
     paras.map! {|p| Text.new(p, :type => :code)}
-    puts "EMBED: #{paras}"
+    Logger.log "EMBED: #{paras}"
     unless filters.empty?
       filters.each {|f| paras = f.process(paras)}
       paras = paras.find_all {|p| p[:included]}

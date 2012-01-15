@@ -2,17 +2,16 @@ require 'pp'
 require 'zip/zipfilesystem'
 require 'fileutils'
 
+SKEL = File.expand_path('../skel.odt', __FILE__)
 
 class OdtReplacer < Processor
 
-  def initialize( odt_skeleton_path, output_path )
-    @odt_skeleton_path = odt_skeleton_path
+  def initialize( output_path )
     @output_path = output_path
   end
 
   def process( new_content )
-#puts @odt_skeleton_path, @output_path 
-    FileUtils.cp( @odt_skeleton_path, @output_path )
+    FileUtils.cp( SKEL, @output_path )
 
     Zip::ZipFile.open( @output_path ) do |zipfile|
       zipfile.file.open("content.xml", "w") do |content|

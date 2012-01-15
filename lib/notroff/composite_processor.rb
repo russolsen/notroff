@@ -13,23 +13,28 @@ class CompositeProcessor
 
   def process(paras=[])
     @processors.each do |processor|
-      puts "Applying processor #{processor.class} to #{paras.size} paragraphs"
-      paras = processor.process( paras )
-      puts "After processor #{processor.class}"
+      Logger.log "Applying processor #{processor.class} to #{paras.size} paragraphs"
       dump(paras)
+      Logger.log
+      paras = processor.process( paras )
+      Logger.log "After processor #{processor.class}"
+      Logger.log
     end
     paras
   end
 
-  def dump(array)
-    if array.nil?
-      puts "Array: #{array}"
+  def dump(data)
+    return unless Verbose
+    Logger.log "======="
+    if data.nil?
+      Logger.log "data: nil"
+    elsif data.kind_of?(Array)
+      Logger.log "data with #{data.size} items:"
+      data.each_with_index {|item, i| Logger.log "[#{i}] - #{item.inspect}" }
     else
-      puts "======="
-      puts "Array with #{array.size} items:"
-      array.each_with_index {|item, i| puts "[#{i}] - #{item}" }
-      puts "======="
+      Logger.log data
     end
+    Logger.log "======="
   end
 end
 
