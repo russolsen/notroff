@@ -14,7 +14,7 @@ task :html do |t|
 end
 
 task :odt do |t|
-  sh "ruby -Ilib -rnotroff bin/notroff -o test.nr test.odt"
+  sh "ruby -Ilib -rnotroff bin/notroff -v -o test.nr test.odt"
 end
 
 task :docbook do |t|

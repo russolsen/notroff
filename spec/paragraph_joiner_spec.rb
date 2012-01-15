@@ -24,3 +24,19 @@ describe BodyParagraphJoiner do
     new_paras[1].string.should == "para4 para5"
   end
 end
+
+describe CodeParagraphJoiner do
+  let(:pj) { CodeParagraphJoiner.new(:code) }
+
+  let(:paras) do
+    paras = %W{ para1 para2 para3 para4 para5}
+    paras.map {|p| Text.new(p, :type => :code) }
+  end
+
+  it 'should join paragraphs with the newlines intact' do
+    new_paras = pj.process(paras)
+    new_paras.size.should == 1
+    new_paras[0][:type].should == :code
+    new_paras[0].string.should == "para1\npara2\npara3\npara4\npara5"
+  end
+end

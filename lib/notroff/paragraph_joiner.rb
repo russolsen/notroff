@@ -7,8 +7,7 @@ class ParagraphJoiner
 
       if join?(paragraph)
         if new_p
-          new_p.string += " "
-          new_p.string += paragraph
+          new_p.string = join(new_p.string, paragraph)
         else
           new_p = paragraph
         end
@@ -22,6 +21,10 @@ class ParagraphJoiner
     end
     processed_paragraphs << new_p if new_p
     processed_paragraphs
+  end
+
+  def join(first, second)
+    first + " " + second
   end
 
   def join?(paragraph)
@@ -46,6 +49,10 @@ class BodyParagraphJoiner < ParagraphJoiner
 end
 
 class CodeParagraphJoiner < ParagraphJoiner
+  def join(first, second)
+    first + "\n" + second
+  end
+
   def join?(paragraph)
     return false unless paragraph[:type] == :code
     true

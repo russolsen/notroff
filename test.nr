@@ -3,6 +3,14 @@
 
 Surprise. blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah , blah  blah  blah  blah  blah  blah  blah . blah  blah  blah  blah  blah  blah  blah , blah  blah , blah 's blah  blah  blah  blah  blah 's blah  blah , blah 's blah  blah  blah , blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah  blah .
 
+.code
+a = 44
+b = 99
+a.times do |i|
+  puts i
+end
+.body
+
 It's blah  blah  blah  blah  blah  blah  blah  blah  blah  blah 
 much blah  blah  blah  blah  blah  blah  blah  blah  blah .
 All blah  blah  blah  blah  blah  blah , blah  blah 
