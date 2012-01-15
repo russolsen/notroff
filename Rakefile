@@ -9,8 +9,15 @@ task :spec do |t|
   sh "rspec -Ispec -Ilib -rnotroff spec"
 end
 
-desc "Run notroff"
-task :run do |t|
+task :html do |t|
+  sh "ruby -Ilib -rnotroff bin/notroff  test.nr test.html"
+end
+
+task :odt do |t|
+  sh "ruby -Ilib -rnotroff bin/notroff -o test.nr test.odt"
+end
+
+task :docbook do |t|
   sh "ruby -Ilib -rnotroff bin/notroff -d test.nr test.xml"
 end
 
