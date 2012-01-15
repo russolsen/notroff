@@ -7,7 +7,7 @@ describe Formatter do
     new_paras = formatter.process(text_paras)
     new_paras.size.should == 1
     new_paras[0][:type].should == :body
-    new_paras[0].string.should == "para1\npara2\npara3\npara4\npara5"
+    new_paras[0].string.should == "para1 para2 para3 para4 para5"
   end
 
   it 'should deal with sticky commands' do

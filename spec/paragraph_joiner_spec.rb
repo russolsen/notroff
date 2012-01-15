@@ -10,7 +10,7 @@ describe BodyParagraphJoiner do
     new_paras = pj.process(paras)
     new_paras.size.should == 1
     new_paras[0][:type].should == :body
-    new_paras[0].string.should == "para1\npara2\npara3\npara4\npara5"
+    new_paras[0].string.should == "para1 para2 para3 para4 para5"
   end
 
   it 'should turn stop joining on an empty paragraph' do
@@ -19,8 +19,8 @@ describe BodyParagraphJoiner do
     pp new_paras
     new_paras.size.should == 2
     new_paras[0][:type].should == :body
-    new_paras[0].string.should == "para1\npara2"
+    new_paras[0].string.should == "para1 para2"
     new_paras[1][:type].should == :body
-    new_paras[1].string.should == "para4\npara5"
+    new_paras[1].string.should == "para4 para5"
   end
 end
