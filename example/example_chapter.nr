@@ -1,5 +1,4 @@
-.cn Chapter 8
-.ct Embrace Dynamic Typing
+.chapter Chapter 8: Embrace Dynamic Typing
 
 This is !!bold!!. This is ~~italics~~. This is @@some code@@ in the text.{{Don't forget the footnotes, they can be the best part!}}
 
