@@ -18,13 +18,13 @@ class CompositeProcessor
       Logger.log
       paras = processor.process( paras )
       Logger.log "After processor #{processor.class}"
+      dump(paras)
       Logger.log
     end
     paras
   end
 
   def dump(data)
-    return unless Verbose
     Logger.log "======="
     if data.nil?
       Logger.log "data: nil"

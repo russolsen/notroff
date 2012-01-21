@@ -71,6 +71,7 @@ class EmbeddedRubyProcessor
       if p[:type] == :x
         Logger.log p
         results = process_command(p.string)
+        puts "**** results: #{results}"
         new_paragraphs << results if results
       else
         new_paragraphs << p
@@ -81,12 +82,13 @@ class EmbeddedRubyProcessor
 
   def process_command(ruby_expression)
     Logger.log "Ruby expression: #{ruby_expression}"
-    lines = eval(ruby_expression, binding)
+    paras = eval(ruby_expression, binding)
+    paras = [paras] unless paras.kind_of?(Array)
+    paras.map! {|p| Text.new(p, :type => :code)}
   end
 
   def embed(*filters, &block)
     paras = block.call.map {|line| line.rstrip}
-    paras.map! {|p| Text.new(p, :type => :code)}
     Logger.log "EMBED: #{paras}"
     unless filters.empty?
       filters.each {|f| paras = f.process(paras)}
@@ -99,8 +101,13 @@ class EmbeddedRubyProcessor
     embed(*filters) {File.readlines(path)}
   end
 
-  def run(command, *filters)
-    embed(*filters) {File.popen(command).readlines}
+  def run(shell_command, *filters)
+    embed(*filters) {File.popen(shell_command).readlines}
+  end
+
+  def ex(ruby_command, *filters)
+    puts "ruby_command: #{ruby_command}"
+    embed(*filters) {eval(ruby_command).to_s.split("\n")}
   end
 
   def matches(re1, re2=re1)
