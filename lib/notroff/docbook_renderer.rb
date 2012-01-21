@@ -29,6 +29,17 @@ class DocbookRenderer < Processor
     doc
   end
 
+  def current_chapter
+    @chapter || new_chapter
+  end
+
+  def new_chapter
+    @chapter = Element.new('chapter')
+    @chapters << @chapter
+    @section = nil
+    @chapter
+  end
+
   def element_for(type, text)
     result = Element.new(type)
     result.add_text(text)
@@ -48,16 +59,14 @@ class DocbookRenderer < Processor
       @author = text
     when :chapter
       Logger.log "adding chapter #{text}"
-      @chapter = Element.new('chapter')
-      @chapters << @chapter
-      @section = nil
+      new_chapter
       title_element = Element.new('title')
       add_body_text(title_element, text)
       @chapter.add_element(title_element)
     when :section
       Logger.log "adding section #{text}"
       @section = Element.new('section')
-      @chapter.add(@section)
+      current_chapter.add(@section)
       title_element = Element.new('title')
       add_body_text(title_element, text)
       @section.add_element(title_element)
@@ -76,10 +85,8 @@ class DocbookRenderer < Processor
   def add_content_element(el)
     if @section
       @section.add_element(el)
-    elsif @chapter
-      @chapter.add_element(el)
     else
-      raise "No chapter to add #{el} to"
+      current_chapter.add_element(el)
     end
   end
 
