@@ -16,7 +16,8 @@ class DocbookRenderer < Processor
       format( paragraph )
     end
     @book = Element.new('book')
-    @book.add_namespace('http://docbook.org/ns/docbook')
+    @book.add_namespace( 'http://docbook.org/ns/docbook')
+    @book.add_namespace('xl', 'http://www.w3.org/1999/xlink')
     @book.add_attribute('version', '5.0')
     @book.add_element element_for('title', @title)
     @book.add_element element_for('author', @author)
@@ -135,10 +136,21 @@ class DocbookRenderer < Processor
       element.add_text( token.string )
     when :footnote
       element.add(footnote_for(token.string))
+    when :link
+      element.add(link_element_for(token.string))
     else
       raise "Dont know what to do with #{token}"
     end
   end
+
+  def link_element_for(link_token)
+    text, url = parse_link(link_token)
+    link = Element.new('link')
+    add_body_text(link, text)
+    link.add_attribute('xl:href', url)
+    link
+  end
+
 
   def footnote_for( text )
     fn = Element.new('footnote')

@@ -3,7 +3,7 @@ require 'rexml/document'
 module Tokenize
   def tokenize_body_text( text )
     text = text.dup
-    re = /\~\~.*?\~\~|\@\@.*?\@\@+|\{\{.*?\}\}|!!.*?!!/
+    re = /\~\~.*?\~\~|\@\@.*?\@\@+|\{\{.*?\}\}|!!.*?!!|\^\^.+\^\^/
     results = []
     until text.empty?
       match = re.match( text )
@@ -32,7 +32,13 @@ module Tokenize
       :footnote
     when /^!/
       :bold
-    end 
+    when /^\^/
+      :link
+    end
+  end
+
+  def parse_link(link_token)
+    link_token.split('->').map {|s| s.strip}
   end
 
   def token_text( token )

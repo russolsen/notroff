@@ -99,6 +99,10 @@ class OdtRenderer < Processor
       element.add_text( token.string )
     when :footnote
       element.add( footnote_for( token.string ) )
+    when :link
+      text, url = parse_link(token)
+      add_body_text(text, element)
+      element.add_text( " (#{url}) " )
     else
       raise "Dont know what to do with #{token}"
     end

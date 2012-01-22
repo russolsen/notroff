@@ -71,9 +71,19 @@ class HtmlRenderer < Processor
       element.add_text(token.string)
     when :footnote
       add_body_text(" [#{token.string}] ", element)
+    when :link
+      element.add(anchor_element_for(token))
     else
       raise "Dont know what to do with type #{token[:type]} - #{token}"
     end
+  end
+
+  def anchor_element_for(link_token)
+    text, url = parse_link(link_token)
+    anchor = Element.new('a')
+    add_body_text(text, anchor)
+    anchor.add_attribute('href', url)
+    anchor
   end
 
   def code_element(type, text)
