@@ -9,6 +9,9 @@ while true
   if ARGV.first == '-o'
     formatter_class = OdtFormatter
     ARGV.shift
+  elsif ARGV.first == '-h'
+    formatter_class = HtmlFormatter
+    ARGV.shift
   elsif ARGV.first == '-d'
     formatter_class = DocbookFormatter
     ARGV.shift

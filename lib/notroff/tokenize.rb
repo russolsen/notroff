@@ -3,7 +3,7 @@ require 'rexml/document'
 module Tokenize
   def tokenize_body_text( text )
     text = text.dup
-    re = /\~\~.*?\~\~|\@\@.*?\@\@+|\{\{.*?\}\}|!!.*?!!|\^\^.+\^\^/
+    re = /\~\~.*?\~\~|\@\@.*?\@\@+|\{\{.*?\}\}|!!.*?!!|\^\^.*?\^\^/
     results = []
     until text.empty?
       match = re.match( text )

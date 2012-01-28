@@ -1,4 +1,4 @@
-class CodeTypeRefiner
+class TypeRefiner
   def process( paragraphs )
     processed_paragraphs = []
 
@@ -8,7 +8,7 @@ class CodeTypeRefiner
       type = paragraph[:type]
       previous_type = previous_paragraph_type(paragraphs, i)
       next_type = next_paragraph_type(paragraphs, i)
-      new_type = code_type_for( previous_type, type, next_type )
+      new_type = type_for( previous_type, type, next_type )
       new_paragraph = paragraph.clone
       new_paragraph[:type] = new_type
       processed_paragraphs << new_paragraph
@@ -25,8 +25,10 @@ class CodeTypeRefiner
     return nil if (i + 1) >= paragraphs.size
     paragraphs[i+1][:type]
   end
+end
 
-  def code_type_for( previous_type, type, next_type )
+class CodeTypeRefiner < TypeRefiner
+  def type_for( previous_type, type, next_type )
     Logger.log "code type for [#{previous_type}] [#{type}] [#{next_type}]"
     if type != :code
       new_type = type

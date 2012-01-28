@@ -22,9 +22,23 @@ class HtmlRenderer < Processor
 
     if type == :code
       code_element(type, text)
+    elsif type == :group and p[:kid_type] == :list
+      list_element('ol', p[:kids])
+    elsif type == :group and p[:kid_type] == :bullet
+      list_element('ul', p[:kids])
     else
       text_element(type, text)
     end
+  end
+
+  def list_element(type, paras)
+    list = Element.new(type)
+    paras.each do |para|
+      item = Element.new('li')
+      add_body_text(para.string, item)
+      list.add(item)
+    end
+    list
   end
 
   def text_element(type, text)

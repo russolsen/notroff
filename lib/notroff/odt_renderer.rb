@@ -43,13 +43,20 @@ class OdtRenderer < Processor
 
     return nil if text.empty? and ! code_type?( type )
 
-    result = new_text_element( type )
+    result = nil
 
     if [ :author, :section, :sec, :title, :pn, :pt, :chapter ].include?( type )
+      result = new_text_element( type )
       result.add_text( text.string )
     elsif [:body, :quote].include?(type)
+      result = new_text_element( type )
       add_body_text( text, result )
+    elsif list_type?(para)
+      result = new_list_element(para[:kids])
+    elsif bullet_type?(para)
+      result = new_bullet_element(para[:kids])
     elsif code_type?(type)
+      result = new_text_element( type )
       add_code_text( text, result )
     else
       raise "Dont know what to do with type [#{type}]"
@@ -57,8 +64,77 @@ class OdtRenderer < Processor
     result
   end
 
+  def group?(para)
+    para[:type] == :group
+  end
+
+  def list_type?(para)
+    group?(para) and para[:kid_type] == :list
+  end
+
+  def bullet_type?(para)
+    group?(para) and para[:kid_type] == :bullet
+  end
+
   def code_type?( type )
     [ :first_code, :middle_code, :end_code, :single_code ].include?(type)
+  end
+
+#      <text:list xml:id="list899615401" text:style-name="L2">
+#        <text:list-item>
+#          <text:p text:style-name="P7">first</text:p>
+#        </text:list-item>
+#        <text:list-item>
+#          <text:p text:style-name="P3">second</text:p>
+#        </text:list-item>
+#        <text:list-item>
+#          <text:p text:style-name="P4">third</text:p>
+#        </text:list-item>
+#      </text:list>
+
+
+  def new_list_element(items)
+    list = Element.new('text:list')
+    list.attributes['text:style-name'] = 'L2'
+    items.each_with_index do |item, i|
+      puts "*** adding item: #{item}"
+      list_item_element = Element.new('text:list-item')
+      text_element = Element.new('text:p')
+      text_element.attributes['text:style-name'] = numbered_item_style_for(items, i)
+      add_body_text(item.string, text_element)
+      list_item_element.add(text_element)
+      list.add(list_item_element)
+    end
+    puts list.to_s
+    list
+  end
+
+  def numbered_item_style_for(items, i)
+    return 'P7' if i == 0
+    return 'P4' if i == (items.size-1)
+    'P3'
+  end
+
+  def new_bullet_element(items)
+    list = Element.new('text:list')
+    list.attributes['text:style-name'] = 'L1'
+    items.each_with_index do |item, i|
+      puts "*** adding item: #{item}"
+      list_item_element = Element.new('text:list-item')
+      text_element = Element.new('text:p')
+      text_element.attributes['text:style-name'] = bullet_item_style_for(items, i)
+      add_body_text(item.string, text_element)
+      list_item_element.add(text_element)
+      list.add(list_item_element)
+    end
+    puts list.to_s
+    list
+  end
+
+  def bullet_item_style_for(items, i)
+    return 'List_20_1_20_Start' if i == 0
+    return 'List_20_1_20_End' if i == (items.size-1)
+    'List_20_1_20_Cont.'
   end
 
   def new_text_element( type )

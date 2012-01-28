@@ -14,6 +14,8 @@ class HtmlFormatter < Formatter
     super()
     prepend_processor FileReader.new(input)
     add_processor CodeParagraphJoiner.new
+    add_processor Grouper.new(:bullet)
+    add_processor Grouper.new(:list)
     add_processor HtmlRenderer.new
     add_processor FileWriter.new(output)
   end
@@ -24,6 +26,8 @@ class DocbookFormatter < Formatter
     super()
     prepend_processor FileReader.new(input)
     add_processor CodeParagraphJoiner.new
+    add_processor Grouper.new(:bullet)
+    add_processor Grouper.new(:list)
     add_processor DocbookRenderer.new
     add_processor FileWriter.new(output)
   end
@@ -34,6 +38,8 @@ class OdtFormatter < Formatter
     super()
     prepend_processor FileReader.new(input)
     add_processor CodeTypeRefiner.new
+    add_processor Grouper.new(:bullet)
+    add_processor Grouper.new(:list)
     add_processor OdtRenderer.new
     add_processor TemplateExpander.new
     add_processor OdtReplacer.new(output)

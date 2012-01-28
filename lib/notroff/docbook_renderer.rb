@@ -78,8 +78,10 @@ class DocbookRenderer < Processor
       add_content_element(paragraph)
     when :code
       add_content_element(code_element(type, text))
+    when :group
+      add_content_element(group_element(p))
     else
-      raise "#{type}???"
+      raise "Dont know what to do with #{type}"
     end
   end
 
@@ -89,6 +91,49 @@ class DocbookRenderer < Processor
     else
       current_chapter.add_element(el)
     end
+  end
+
+#    <itemizedlist mark='opencircle'>
+#      <listitem>
+#  6     <para>TeX and LaTeX
+#        </para>
+#  8   </listitem>
+#      <listitem override='bullet'>
+# 10     <para>Troff
+#        </para>
+# 12   </listitem>
+#      <listitem>
+# 14     <para>Lout
+#        </para>
+# 16   </listitem>
+#    </itemizedlist>
+
+  def group_element(para)
+    group_type = para[:kid_type]
+    kids = para[:kids]
+    list_element = list_element_for(group_type)
+    kids.each {|k| list_element.add(list_item_element_for(k))}
+    list_element
+  end
+
+  def list_element_for(type)
+    el = nil
+    if type == :bullet
+      el = Element.new('itemizedlist')
+      el.add_attribute('mark', 'opencircle')
+    elsif type == :list
+      el = Element.new('orderedlist')
+      el.add_attribute('numeration', 'arabic')
+    else
+      raise "Don't know what to do with list type #{type}"
+    end
+    el
+  end
+
+  def list_item_element_for(para)
+    el = Element.new('listitem')
+    add_body_text(Element.new('para', el), para.string)
+    el
   end
 
   def text_element(type, text)
