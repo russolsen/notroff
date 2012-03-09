@@ -56,14 +56,17 @@ class DocbookRenderer < Processor
     case type
     when :title
       @title = text
+
     when :author
       @author = text
+
     when :chapter
       Logger.log "adding chapter #{text}"
       new_chapter
       title_element = Element.new('title')
       add_body_text(title_element, text)
       @chapter.add_element(title_element)
+
     when :section
       Logger.log "adding section #{text}"
       @section = Element.new('section')
@@ -71,15 +74,27 @@ class DocbookRenderer < Processor
       title_element = Element.new('title')
       add_body_text(title_element, text)
       @section.add_element(title_element)
+
     when :body
       Logger.log "adding body #{text[0..5]}"
       paragraph = Element.new('para')
       add_body_text(paragraph, text)
       add_content_element(paragraph)
+
+    when :quote
+      Logger.log "adding blockquote #{text[0..9]}"
+      quote = Element.new('blockquote')
+      paragraph = Element.new('para')
+      add_body_text(paragraph, text)
+      quote.add(paragraph)
+      add_content_element(quote)
+
     when :code
       add_content_element(code_element(type, text))
+
     when :group
       add_content_element(group_element(p))
+
     else
       raise "Dont know what to do with #{type}"
     end

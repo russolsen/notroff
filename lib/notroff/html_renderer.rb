@@ -42,6 +42,8 @@ class HtmlRenderer < Processor
   end
 
   def text_element(type, text)
+    puts "*** text element: #{type}"
+    puts "*** text #{text}"
     element = Element.new(tag_for(type))
     add_body_text(text, element)
     element
@@ -61,6 +63,8 @@ class HtmlRenderer < Processor
       'h3'
     when :chapter
       'h2'
+    when :quote
+      'blockquote'
     when :title
       'h1'
     else

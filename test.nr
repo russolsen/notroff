@@ -1,5 +1,11 @@
 hello out there ^^this points to yahoo->http://www.yahoo.com^^ more text
 
+This is a block quote:
+.quote
+Four score and seven years ago
+The second line of the quote
+.body
+
 This is bullets:
 .bullet first
 .bullet second
