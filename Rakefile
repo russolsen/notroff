@@ -6,7 +6,7 @@ task :default =>  [ :spec, :gem ]
 
 gem_spec = Gem::Specification.new do |s|
   s.name = "notroff"
-  s.version = "0.2.9"
+  s.version = "0.2.10"
   s.authors = ["Russ Olsen"]
   s.date = %q{2012-01-15}
   s.description = 'NotRoff A simple text to openoffice filter'
