@@ -8,7 +8,7 @@ class TypeAssigner
       type = paragraph[:type]
       if (type == :body) or (type == :code) or (type == :quote)
         current_type = type
-      elsif type == :code1
+      elsif type == :c1 || type == :code1
         paragraph[:type] = :code
         processed_paragraphs << paragraph
       elsif type == :text
