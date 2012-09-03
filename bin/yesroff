@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'pp'
+require "yesroff"
+
+unless ARGV.size == 1
+  raise "Usage: yesroff <<odt_file>>"
+end
+
+
+parser = OdtParser.new(ARGV[0])
+parser.parse
+parser.render
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
