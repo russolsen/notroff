@@ -9,16 +9,24 @@ class OdtRenderer < Processor
   LONG_DASH_CODE = 0xe1.chr + 0x80.chr + 0x93.chr
 
   PARAGRAPH_STYLES = { 
-    :body => 'BodyNoIndent',
-    :title => 'HB',
+    :body => 'FT',
+    :body2 => 'IT',
+    :title => 'HA',
+    :subtitle => 'HB',
     :section => 'HC',
     :sec => 'HC',
+    :subsec => 'HD',
     :first_code => 'CDT1',
     :middle_code => 'CDT',
     :end_code => 'CDTX',
     :author => 'AU',
     :quote => 'Quotation',
+    :attribution => 'Quotation Attribution',
     :single_code => 'C1',
+    :ltitle => 'LH',
+    :first_listing => 'LC',
+    :middle_listing => 'LC2',
+    :end_listing => 'LX',
     :pn => 'PN',
     :pt => 'PT',
     :cn => 'HA',
@@ -45,19 +53,30 @@ class OdtRenderer < Processor
 
     result = nil
 
-    if [ :author, :section, :sec, :title, :pn, :pt, :chapter ].include?( type )
-      result = new_text_element( type )
-      result.add_text( text.string )
-    elsif [:body, :quote].include?(type)
+
+    if [:body, :body2].include?(type)
+      Logger.log("Rendering bodyish para of type ", type )
       result = new_text_element( type )
       add_body_text( text, result )
+
+    elsif quote_type?(para)
+      result = new_quote_element(para[:kid_type], para[:kids])
+
     elsif list_type?(para)
       result = new_list_element(para[:kids])
+
     elsif bullet_type?(para)
       result = new_bullet_element(para[:kids])
+
     elsif code_type?(type)
       result = new_text_element( type )
       add_code_text( text, result )
+
+    elsif PARAGRAPH_STYLES[type]
+      Logger.log("Rendering simple para of type ", type )
+      result = new_text_element( type )
+      result.add_text( text.string )
+
     else
       raise "Dont know what to do with type [#{type}]"
     end
@@ -66,6 +85,10 @@ class OdtRenderer < Processor
 
   def group?(para)
     para[:type] == :group
+  end
+
+  def quote_type?(para)
+    group?(para) and [:quote, :attribution].include?(para[:kid_type])
   end
 
   def list_type?(para)
@@ -77,21 +100,21 @@ class OdtRenderer < Processor
   end
 
   def code_type?( type )
-    [ :first_code, :middle_code, :end_code, :single_code ].include?(type)
+    [ :first_code, :middle_code, :end_code, :single_code,
+      :listing, :first_listing, :middle_listing, :end_listing ].include?(type)
   end
 
-#      <text:list xml:id="list899615401" text:style-name="L2">
-#        <text:list-item>
-#          <text:p text:style-name="P7">first</text:p>
-#        </text:list-item>
-#        <text:list-item>
-#          <text:p text:style-name="P3">second</text:p>
-#        </text:list-item>
-#        <text:list-item>
-#          <text:p text:style-name="P4">third</text:p>
-#        </text:list-item>
-#      </text:list>
-
+  def new_quote_element(type, items)
+    p = new_text_element(type)
+    items.each_with_index do |item, i|
+      p.add( Element.new('text:line-break')) unless i == 0
+      el = Element.new('text:span')
+      add_body_text(item.string, el)
+      p.add(el)
+    end
+    puts p.to_s
+    p
+  end
 
   def new_list_element(items)
     list = Element.new('text:list')

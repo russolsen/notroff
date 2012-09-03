@@ -28,22 +28,45 @@ class TypeRefiner
 end
 
 class CodeTypeRefiner < TypeRefiner
+  def initialize(base_type=:code, first_type=:first_code, middle_type=:middle_code,
+    end_type=:end_code, single_type=middle_type)
+    @base_type = base_type
+    @first_type = first_type
+    @middle_type = middle_type
+    @end_type = end_type
+    @single_type = single_type
+  end
+
   def type_for( previous_type, type, next_type )
     Logger.log "code type for [#{previous_type}] [#{type}] [#{next_type}]"
-    if type != :code
+    if type != @base_type
       new_type = type
 
-    elsif previous_type == :code and next_type == :code
-      new_type = :middle_code
+    elsif previous_type ==@base_type and next_type == @base_type
+      new_type = @middle_type
 
-    elsif previous_type == :code
-      new_type = :end_code
+    elsif previous_type == @base_type
+      new_type = @end_type
 
-    elsif next_type == :code
-      new_type = :first_code
+    elsif next_type == @base_type
+      new_type = @first_type
 
     else
-      new_type = :single_code
+      new_type = @single_type
+    end
+
+    Logger.log("new type: #{new_type}")
+    new_type
+  end
+end
+
+class BodyTypeRefiner < TypeRefiner
+  def type_for( previous_type, type, next_type )
+    Logger.log "body type for [#{previous_type}] [#{type}] [#{next_type}]"
+
+    new_type = type
+    if (type == :body) and (previous_type == :body)
+      new_type = :body2
     end
 
     Logger.log("new type: #{new_type}")

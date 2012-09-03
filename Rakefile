@@ -6,15 +6,15 @@ task :default =>  [ :spec, :gem ]
 
 gem_spec = Gem::Specification.new do |s|
   s.name = "notroff"
-  s.version = "0.2.11"
+  s.version = "0.3.0"
   s.authors = ["Russ Olsen"]
-  s.date = %q{2012-01-15}
+  s.date = %q{2012-09-03}
   s.description = 'NotRoff A simple text to openoffice filter'
   s.summary = s.description
   s.email = 'russ@russolsen.com'
   s.files = FileList[ 'readme.nr', 'spec/**/*', 'lib/**/*' ]
   s.bindir = "bin"
-  s.executables = ["notroff"]
+  s.executables = %w{notroff yesroff}
   s.require_path = "lib"
   s.homepage = 'http://www.russolsen.com'
 end
