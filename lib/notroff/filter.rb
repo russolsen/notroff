@@ -13,3 +13,14 @@ class IncludedFilter < Filter
     paragraph[:included]
   end
 end
+
+class RegularExpressionExcludeFilter < Filter
+  def initialize(exclude_re)
+    @exclude_re = exclude_re
+  end
+
+  def included?(paragraph)
+    @exclude_re !~ paragraph    
+  end
+  
+end

@@ -36,7 +36,9 @@ end
 class OdtFormatter < Formatter
   def initialize(input, output)
     super()
+    prepend_processor RegularExpressionExcludeFilter.new(/^--.*$/)
     prepend_processor FileReader.new(input)
+
     add_processor BodyTypeRefiner.new
     add_processor CodeTypeRefiner.new
     add_processor CodeTypeRefiner.new(:listing, :first_listing, :middle_listing, :end_listing)
