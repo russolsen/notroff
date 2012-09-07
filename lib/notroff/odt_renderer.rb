@@ -41,7 +41,7 @@ class OdtRenderer < Processor
       new_element = format( paragraph )
       elements << new_element if new_element
     end
-    elements
+    {:body => elements}
   end
 
   def format( para )
