@@ -3,6 +3,7 @@ class NRWriter
 
   def initialize
     @para_style = :body
+    @text_style = :normal
     @single_line = false
   end
 
@@ -17,6 +18,24 @@ class NRWriter
     end
     @para_style = new_style
     @single_line = single_line
+  end
+
+  def switch_text_style(new_style)
+    debug " <<switching to new style #{new_style}>>  "
+    return if @text_style == new_style
+    if @text_style != :normal
+      toggle_text_style(@text_style)
+    end
+    if new_style != :normal
+      toggle_text_style(new_style)
+    end
+    @text_style = new_style
+  end
+
+  def toggle_text_style(style)
+    toggle_bold if style == :bold
+    toggle_italic if style == :italic
+    toggle_code if style == :code    
   end
 
   def end_paragraph

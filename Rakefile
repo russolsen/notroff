@@ -6,7 +6,7 @@ task :default =>  [ :spec, :gem ]
 
 gem_spec = Gem::Specification.new do |s|
   s.name = "notroff"
-  s.version = "0.3.1"
+  s.version = "0.3.2"
   s.authors = ["Russ Olsen"]
   s.date = %q{2012-09-03}
   s.description = 'NotRoff A simple text to openoffice filter'
@@ -17,6 +17,8 @@ gem_spec = Gem::Specification.new do |s|
   s.executables = %w{notroff yesroff}
   s.require_path = "lib"
   s.homepage = 'http://www.russolsen.com'
+  s.add_dependency('rubyzip')
+  s.add_development_dependency('rspec')
 end
 
 Gem::PackageTask.new( gem_spec ) do |t|

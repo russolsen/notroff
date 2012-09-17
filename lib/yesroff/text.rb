@@ -32,9 +32,17 @@ class TextStyle < Style
   end
 
   def render(w)
-    w.toggle_bold if @bold
-    w.toggle_code if @code
-    w.toggle_italic if @italic
+    puts "Rendering style #{self}"
+
+    if @bold
+      w.switch_text_style(:bold)
+    elsif @italic
+      w.switch_text_style(:italic)
+    elsif @code
+      w.switch_text_style(:code)
+    else
+      w.switch_text_style(:normal)
+    end
   end
 end
 
@@ -66,6 +74,12 @@ class Container
     @contents << content
   end
 
+  def length
+    l = 0
+    @contents.each {|kid| l += kid.length}
+    l
+  end
+
   def render(w)
     #puts "========= rendering #{self.class} size: #{contents.size}"
     #pp contents
@@ -78,6 +92,8 @@ class Span < Container
   attr_accessor :indent
 
   def render(w)
+    debug "\nrendering span #{self} length #{self.length}"
+    return if self.length == 0
     style.render(w)
     w.indent(@indent) if @indent
     super(w)
@@ -87,7 +103,7 @@ end
 
 class Paragraph < Container
   def render(w)
-    style.render(w)
+    style.render(w) if style
     super(w)
     w.end_paragraph
   end
@@ -101,7 +117,14 @@ class Text
   end
 
   def render(w)
-    w.text(@text)
+    text = @text.gsub(/@@/, '\@\@')
+    text = text.gsub(/~~/, '\~\~')
+    text = text.gsub(/!!/, '\!\!')
+    w.text(text)
+  end
+
+  def length
+    @text.length
   end
 
   def to_s

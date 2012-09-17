@@ -3,7 +3,7 @@ require 'pp'
 require "notroff"
 
 options={}
-formatter_class = HtmlFormatter
+formatter_class = OdtFormatter
 
 while true
   if ARGV.first == '-o'
