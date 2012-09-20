@@ -13,9 +13,21 @@ def debug(*args)
   puts args.join(' ')
 end
  
-class OdtParser
+def additional_styles(styles)
+  log "noop additional paragraph styles function"
+end
 
+debug additional_text_styles(styles)
+  log "noop additional text styles function"
+end
+
+class OdtParser
   def initialize(odt_path)
+    if File.exist?("yesroff.rc")
+      log "loading notroff.rb"
+      load 'yesroff.rc'
+    end
+
     log "Reading #{odt_path}..."
     Zip::ZipFile.open(odt_path ) do |zipfile|
       zipfile.file.open("content.xml") do |content|
@@ -34,68 +46,64 @@ class OdtParser
     cd1 = TextStyle.new("CD1")
     cd1.code = true
 
-    styles = [
-      cd1,
-      TextStyle.new("Default"),
-      TextStyle.new("C1"),
-      TextStyle.new("C1_20_HD"),
-      TextStyle.new("FN"),
-      TextStyle.new("Base_20_Font"),
-      TextStyle.new("Chapter_20_Word")
-    ]
-    hash = {}
-    styles.each {|s| hash[s.name] = s}
+    hash = StyleHash.new
+    hash.add_style cd1
+    hash.add_style TextStyle.new("Default")
+    hash.add_style TextStyle.new("C1")
+    hash.add_style TextStyle.new("C1_20_HD")
+    hash.add_style TextStyle.new("FN")
+    hash.add_style TextStyle.new("Base_20_Font")
+    hash.add_style TextStyle.new("Chapter_20_Word")
+    additional_text_styles(hash)
     hash
   end
 
+
   def default_para_styles
-    styles = [
-    ParagraphStyle.new('FT', nil, :body, false),
-    ParagraphStyle.new('IT', nil, :body, false),
-    ParagraphStyle.new('Quotation', nil, :quote, true),
+    styles = StyleHash.new
+    styles.add_style ParagraphStyle.new('FT', nil, :body, false)
+    styles.add_style ParagraphStyle.new('IT', nil, :body, false)
+    styles.add_style ParagraphStyle.new('Quotation', nil, :quote, true)
 
-    ParagraphStyle.new('CDT1', nil, :code, false),
-    ParagraphStyle.new('CDT', nil, :code, false),
-    ParagraphStyle.new('CDTX', nil, :code, false),
-    ParagraphStyle.new('C1', nil, :c1, true),
-    ParagraphStyle.new('C2', nil, :c1, true),
-    ParagraphStyle.new('TB', nil, :c1, true),
-    ParagraphStyle.new('Free_20_Form', nil, :c1, true),
+    styles.add_style ParagraphStyle.new('CDT1', nil, :code, false)
+    styles.add_style ParagraphStyle.new('CDT', nil, :code, false)
+    styles.add_style ParagraphStyle.new('CDTX', nil, :code, false)
+    styles.add_style ParagraphStyle.new('C1', nil, :c1, true)
+    styles.add_style ParagraphStyle.new('C2', nil, :c1, true)
+    styles.add_style ParagraphStyle.new('TB', nil, :c1, true)
+    styles.add_style ParagraphStyle.new('Free_20_Form', nil, :c1, true)
 
 
-    ParagraphStyle.new('NLC1', nil, :code, false),
-    ParagraphStyle.new('NLC', nil, :code, false),
-    ParagraphStyle.new('NLCX', nil, :code, false),
-    ParagraphStyle.new('NLPara', nil, :code, false),
+    styles.add_style ParagraphStyle.new('NLC1', nil, :code, false)
+    styles.add_style ParagraphStyle.new('NLC', nil, :code, false)
+    styles.add_style ParagraphStyle.new('NLCX', nil, :code, false)
+    styles.add_style ParagraphStyle.new('NLPara', nil, :code, false)
 
-    ParagraphStyle.new('TX', nil, :code, false),
+    styles.add_style ParagraphStyle.new('TX', nil, :code, false)
 
-    ParagraphStyle.new('HA', nil, :title, true),
-    ParagraphStyle.new('HB', nil, :subtitle, true),
-    ParagraphStyle.new('HC', nil, :sec, true),
-    ParagraphStyle.new('HD', nil, :subsec, true),
-    ParagraphStyle.new('TH', nil, :theading, true),
-    ParagraphStyle.new('LH', nil, :ltitle, true),
-    ParagraphStyle.new('LC', nil, :listing, false),
-    ParagraphStyle.new('LC2', nil, :listing, false),
-    ParagraphStyle.new('LX', nil, :listing, false),
+    styles.add_style ParagraphStyle.new('HA', nil, :title, true)
+    styles.add_style ParagraphStyle.new('HB', nil, :subtitle, true)
+    styles.add_style ParagraphStyle.new('HC', nil, :sec, true)
+    styles.add_style ParagraphStyle.new('HD', nil, :subsec, true)
+    styles.add_style ParagraphStyle.new('TH', nil, :theading, true)
+    styles.add_style ParagraphStyle.new('LH', nil, :ltitle, true)
+    styles.add_style ParagraphStyle.new('LC', nil, :listing, false)
+    styles.add_style ParagraphStyle.new('LC2', nil, :listing, false)
+    styles.add_style ParagraphStyle.new('LX', nil, :listing, false)
 
-    ParagraphStyle.new('BL1', nil, :bullet, true),
-    ParagraphStyle.new('BL', nil, :bullet, true),
-    ParagraphStyle.new('BX', nil, :bullet, true),
+    styles.add_style ParagraphStyle.new('BL1', nil, :bullet, true)
+    styles.add_style ParagraphStyle.new('BL', nil, :bullet, true)
+    styles.add_style ParagraphStyle.new('BX', nil, :bullet, true)
 
-    ParagraphStyle.new('NL1', nil, :list, true),
-    ParagraphStyle.new('NL', nil, :list, true),
-    ParagraphStyle.new('NX', nil, :list, true),
+    styles.add_style ParagraphStyle.new('NL1', nil, :list, true)
+    styles.add_style ParagraphStyle.new('NL', nil, :list, true)
+    styles.add_style ParagraphStyle.new('NX', nil, :list, true)
 
-    ParagraphStyle.new('BLPara', nil, :bullet, true),
-    ParagraphStyle.new('Quotation_20_Attribution', nil, :attribution, true)
+    styles.add_style ParagraphStyle.new('BL Para', nil, :bullet, true)
+    styles.add_style ParagraphStyle.new('Quotation_20_Attribution', nil, :attribution, true)
 
-    ]
-
-    hash = {}
-    styles.each {|s| hash[s.name] = s}
-    hash
+    additional_paragraph_styles(styles)
+    styles
   end
 
   def parse
@@ -148,7 +156,7 @@ class OdtParser
   def lookup_para_style(name)
     s = @para_styles[name]
     log "No such para style #{name}" unless s
-    #raise "No such para style #{name}" unless s
+    raise "No such para style #{name}" unless s
     s
   end
 
@@ -191,13 +199,17 @@ class OdtParser
     para
   end
 
+  def parse_indent(el)
+  end
+
   def parse_span(el)
     attrs = el.attributes
-    style = find_or_create_text_style(attrs['text:style-name'])
     indent = attrs['text:c'] ? attrs['text:c'].to_i : 0
+    style = find_or_create_text_style(attrs['text:style-name'])
     span = Span.new(style)
     span.indent = indent
     span.contents = parse_contents(span, el)
+    log("new span: #{span}")
     span
   end
 

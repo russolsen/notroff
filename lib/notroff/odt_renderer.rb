@@ -31,7 +31,8 @@ class OdtRenderer < Processor
     :pt => 'PT',
     :cn => 'HA',
     :chapter => 'HA',
-    :ct => 'HB' }
+    :ct => 'HB',
+    :fc => 'FC'}
 
   @@footnote_number = 1
 
@@ -112,7 +113,6 @@ class OdtRenderer < Processor
       add_body_text(item.string, el)
       p.add(el)
     end
-    puts p.to_s
     p
   end
 
@@ -120,7 +120,6 @@ class OdtRenderer < Processor
     list = Element.new('text:list')
     list.attributes['text:style-name'] = 'L2'
     items.each_with_index do |item, i|
-      puts "*** adding item: #{item}"
       list_item_element = Element.new('text:list-item')
       text_element = Element.new('text:p')
       text_element.attributes['text:style-name'] = numbered_item_style_for(items, i)
@@ -128,7 +127,6 @@ class OdtRenderer < Processor
       list_item_element.add(text_element)
       list.add(list_item_element)
     end
-    puts list.to_s
     list
   end
 
@@ -142,7 +140,6 @@ class OdtRenderer < Processor
     list = Element.new('text:list')
     list.attributes['text:style-name'] = 'L1'
     items.each_with_index do |item, i|
-      puts "*** adding item: #{item}"
       list_item_element = Element.new('text:list-item')
       text_element = Element.new('text:p')
       text_element.attributes['text:style-name'] = bullet_item_style_for(items, i)
@@ -150,7 +147,6 @@ class OdtRenderer < Processor
       list_item_element.add(text_element)
       list.add(list_item_element)
     end
-    puts list.to_s
     list
   end
 

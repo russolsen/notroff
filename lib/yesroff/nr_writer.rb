@@ -2,7 +2,9 @@ class NRWriter
   attr_reader :para_style
 
   def initialize
-    @para_style = :body
+    @bold_depth = 0
+    @italic_depth = 0
+    @code_depth = 0
     @text_style = :normal
     @single_line = false
   end
@@ -21,7 +23,7 @@ class NRWriter
   end
 
   def switch_text_style(new_style)
-    debug " <<switching to new style #{new_style}>>  "
+    log " <<switching to new style #{new_style}>>  "
     return if @text_style == new_style
     if @text_style != :normal
       toggle_text_style(@text_style)
@@ -49,22 +51,43 @@ class NRWriter
   end
 
   def indent(n)
-    print (' ' * n)
-    
-  end
-  def toggle_bold
-    print "!!"
+    log "indent #{n}"
+    print (' ' * n)    
   end
 
-  def toggle_italic
-    print "~~"
+  def start_bold
+    print "!!" if @bold_depth == 0
+    @bold_depth += 1
   end
 
-  def toggle_code
-    print '@@'
+  def end_bold
+    print "!!" if @bold_depth == 1
+    @bold_depth -= 1
+  end
+
+
+  def start_italic
+    print "~~" if @italic_depth == 0
+    @italic_depth += 1
+  end
+
+  def end_italic
+    print "~~" if @italic_depth == 1
+    @italic_depth -= 1
+  end
+
+  def start_code
+    print "@@" if @code_depth == 0
+    @code_depth += 1
+  end
+
+  def end_code
+    print "@@" if @code_depth == 1
+    @code_depth -= 1
   end
 
   def text(t)
+    log "==>Text #{t}"
     print t
   end
 end

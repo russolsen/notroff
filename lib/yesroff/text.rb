@@ -31,18 +31,24 @@ class TextStyle < Style
     result += ']'
   end
 
-  def render(w)
-    puts "Rendering style #{self}"
-
+  def start(w)
     if @bold
-      w.switch_text_style(:bold)
+      w.start_bold
     elsif @italic
-      w.switch_text_style(:italic)
+      w.start_italic
     elsif @code
-      w.switch_text_style(:code)
-    else
-      w.switch_text_style(:normal)
+      w.start_code
     end
+  end
+
+  def stop(w)
+    if @bold
+      w.end_bold
+    elsif @italic
+      w.end_italic
+    elsif @code
+      w.end_code
+    end    
   end
 end
 
@@ -62,12 +68,19 @@ class ParagraphStyle < Style
   end
 end
 
+class StyleHash < Hash
+  def add_style(s)
+    self[s.name] = s
+  end
+end
+
 class Container
   attr_accessor :style, :parent, :contents
 
   def initialize(style, parent=nil, contents=[])
     @style = style
     @contents = contents
+    @parent = parent
   end
 
   def <<(content)
@@ -81,10 +94,18 @@ class Container
   end
 
   def render(w)
-    #puts "========= rendering #{self.class} size: #{contents.size}"
+    #log "========= rendering #{self.class} size: #{contents.size}"
     #pp contents
     #puts "Rendering:"
     contents.each {|c|  c.render(w)}
+  end
+
+  def to_s
+    result = "Container #{style}"
+    if @contents
+      result += @contents.join(' ')      
+    end
+    result
   end
 end
 
@@ -92,12 +113,17 @@ class Span < Container
   attr_accessor :indent
 
   def render(w)
-    debug "\nrendering span #{self} length #{self.length}"
-    return if self.length == 0
-    style.render(w)
-    w.indent(@indent) if @indent
-    super(w)
-    style.render(w)
+    l = self.length
+    #return if l == 0 and indent == 0
+    style.start(w)
+    log "Indenting #{indent}"
+    w.indent(indent) if indent
+    super(w) unless l == 0
+    style.stop(w)
+  end
+
+  def to_s
+    result = " Span: indent #{@indent} #{super} "
   end
 end
 
