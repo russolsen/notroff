@@ -34,12 +34,6 @@ class NRWriter
     @text_style = new_style
   end
 
-  def toggle_text_style(style)
-    toggle_bold if style == :bold
-    toggle_italic if style == :italic
-    toggle_code if style == :code    
-  end
-
   def end_paragraph
     puts
     if @single_line
@@ -65,14 +59,13 @@ class NRWriter
     @bold_depth -= 1
   end
 
-
   def start_italic
     print "~~" if @italic_depth == 0
     @italic_depth += 1
   end
 
   def end_italic
-    print "~~" if @italic_depth == 1
+    print "~~ " if @italic_depth == 1
     @italic_depth -= 1
   end
 
@@ -82,12 +75,38 @@ class NRWriter
   end
 
   def end_code
-    print "@@" if @code_depth == 1
+    print "@@ " if @code_depth == 1
     @code_depth -= 1
+  end
+
+  def special_style?
+    return true unless @para_style ==  :body
+    @code_depth > 0 or @italic_depth > 0 or @bold_depth > 0
+  end
+
+  def split_text(t)
+    return t if t.length < 80
+    words = t.split(' ')
   end
 
   def text(t)
     log "==>Text #{t}"
-    print t
+    if special_style?
+      print t
+    else
+      array = t.split(' ')
+      line_len = 0
+      array.each do |word|
+        print word
+        line_len += word.length
+        if line_len > 70
+          print "\n"
+          line_len = 0
+        else
+          print " "
+          line_len += 1
+        end
+      end
+    end
   end
 end

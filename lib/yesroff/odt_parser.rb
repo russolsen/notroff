@@ -17,7 +17,7 @@ def additional_styles(styles)
   log "noop additional paragraph styles function"
 end
 
-debug additional_text_styles(styles)
+def additional_text_styles(styles)
   log "noop additional text styles function"
 end
 

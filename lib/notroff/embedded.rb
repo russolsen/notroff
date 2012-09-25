@@ -81,7 +81,6 @@ class EmbeddedRubyProcessor
       if p[:type] == :x
         Logger.log p
         results = process_command(p.string)
-        puts "**** results: #{results}"
         new_paragraphs << results if results
       else
         new_paragraphs << p
@@ -121,7 +120,6 @@ class EmbeddedRubyProcessor
   end
 
   def ex(ruby_command, type=:code)
-    puts "ruby_command: #{ruby_command}"
     embed(type, eval(ruby_command).to_s.split("\n"))
   end
 

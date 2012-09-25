@@ -14,18 +14,12 @@ class TemplateExpander < Processor
     insert_body(doc, content_map[:body])
     doc.to_s
   end
-   
-  def insert_body(doc, body_elements)
-    puts "reading file: #{TEMPLATE}"
 
+  def insert_body(doc, body_elements)
     text_element = REXML::XPath.first(doc, PATH)
     n = text_element.elements.size
-    puts "deleting #{n} elements"
     n.times {|i| text_element.delete_element(1)}
-    puts "ELs: #{body_elements.size}"
-    puts "ELs: #{body_elements}"
     body_elements.each {|el| text_element.add_element(el)}
-
     doc
   end
 end
