@@ -6,7 +6,7 @@ task :default =>  [ :spec, :gem ]
 
 gem_spec = Gem::Specification.new do |s|
   s.name = "notroff"
-  s.version = "0.3.3"
+  s.version = "0.3.5"
   s.authors = ["Russ Olsen"]
   s.date = %q{2012-09-03}
   s.description = 'NotRoff A simple text to openoffice filter'
@@ -44,6 +44,11 @@ CLEAN << 'test.odt'
 
 task :docbook do |t|
   sh "ruby -Ilib -rnotroff bin/notroff -v -d test.nr test.xml"
+end
+CLEAN << 'test.xml'
+
+task :code do |t|
+  sh "ruby -Ilib -rnotroff bin/notroff -s test.nr test_spec.rb"
 end
 CLEAN << 'test.xml'
 

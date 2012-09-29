@@ -12,6 +12,9 @@ while true
   elsif ARGV.first == '-h'
     formatter_class = HtmlFormatter
     ARGV.shift
+  elsif ARGV.first == '-s'
+    formatter_class = SpecFormatter
+    ARGV.shift
   elsif ARGV.first == '-d'
     formatter_class = DocbookFormatter
     ARGV.shift
